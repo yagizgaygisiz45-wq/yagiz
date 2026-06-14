@@ -3,33 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yağız Stüdyo | Profesyonel Ekosistem</title>
+    <title>Yağız Stüdyo | Dinamik Ekosistem</title>
     <style>
-        /* Modern Renk Paleti: Yeşil yerine Mor/Neon Mavi */
         :root { --primary: #7000ff; --secondary: #00d4ff; --dark: #0a0a0a; }
         
         body { 
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
-                        url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
-            background-size: cover;
-            color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; 
+            background: #050505; color: #fff; font-family: 'Segoe UI', sans-serif; 
+            margin: 0; padding: 20px; scroll-behavior: smooth;
         }
 
-        .hero { text-align: center; padding: 50px 0; }
-        h1 { color: var(--secondary); font-size: 2.2rem; text-shadow: 0 0 15px var(--primary); }
+        .hero { text-align: center; padding: 60px 0; }
+        h1 { color: var(--secondary); font-size: 2.5rem; animation: pulse 2s infinite; }
+        
+        @keyframes pulse { 0%, 100% { text-shadow: 0 0 10px var(--secondary); } 50% { text-shadow: 0 0 25px var(--primary); } }
 
         .btn-projelerim { 
             background: var(--primary); color: white; padding: 15px 30px; 
-            border-radius: 50px; text-decoration: none; display: block; 
-            width: 200px; margin: 20px auto; text-align: center; font-weight: bold;
+            border-radius: 50px; text-decoration: none; display: inline-block; 
+            transition: 0.3s; border: 2px solid transparent;
         }
+        .btn-projelerim:hover { transform: scale(1.1); border-color: white; }
 
-        .card { background: rgba(20, 20, 20, 0.9); border: 1px solid #333; padding: 20px; border-radius: 15px; margin-bottom: 15px; }
-        .card h3 { color: var(--secondary); margin-top: 0; }
+        .card { 
+            background: rgba(20, 20, 20, 0.9); border: 1px solid #333; 
+            padding: 20px; border-radius: 15px; margin-bottom: 20px;
+            transition: 0.5s;
+        }
         
-        /* AÇILIP KAPANAN EFEKT */
-        .content { display: none; margin-top: 10px; color: #aaa; font-size: 0.9rem; transition: 0.3s; }
-        .toggle-btn { background: transparent; border: 1px solid var(--secondary); color: var(--secondary); padding: 5px 15px; border-radius: 5px; cursor: pointer; }
+        .toggle-btn { background: transparent; border: 1px solid var(--secondary); color: var(--secondary); padding: 8px 15px; border-radius: 5px; cursor: pointer; }
+        .content { display: none; margin-top: 15px; color: #aaa; padding: 10px; border-left: 2px solid var(--primary); }
     </style>
 </head>
 <body>
@@ -37,20 +39,22 @@
 <div class="hero">
     <h1>YAĞIZ STÜDYO</h1>
     <p>Dijital Ekosistem & Yapay Zeka</p>
-    <a href="#projeler" class="btn-projelerim">PROJELERİM</a>
+    <a href="#projeler-bolumu" class="btn-projelerim">PROJELERİM</a>
 </div>
 
-<div id="projeler" class="container">
+<div id="projeler-bolumu" style="padding-top: 50px;">
+    <h2 style="text-align: center;">Teknolojik Çözümler</h2>
+    
     <div class="card">
         <h3>Yapay Zeka & Oyun</h3>
-        <button class="toggle-btn" onclick="toggle(this)">GÖSTER/GİZLE</button>
-        <div class="content">Web tabanlı, yüksek performanslı oyun altyapıları ve AI entegrasyonları.</div>
+        <button class="toggle-btn" onclick="toggle(this)">DETAYLARI GÖR</button>
+        <div class="content">YAKINDA GELECEK: Şu an bu modül üzerinde çok özel bir yapay zeka entegrasyonu hazırlıyorum. Beklemede kal!</div>
     </div>
     
     <div class="card">
         <h3>Kernel & Bypass</h3>
-        <button class="toggle-btn" onclick="toggle(this)">GÖSTER/GİZLE</button>
-        <div class="content">Lua ve C++ tabanlı, gelişmiş güvenlik ve optimizasyon sistemleri.</div>
+        <button class="toggle-btn" onclick="toggle(this)">DETAYLARI GÖR</button>
+        <div class="content">YAKINDA GELECEK: Optimizasyon ve güvenlik protokollerimiz geliştirilme aşamasında. Çok yakında!</div>
     </div>
 </div>
 
@@ -58,6 +62,7 @@
     function toggle(btn) {
         let content = btn.nextElementSibling;
         content.style.display = (content.style.display === "block") ? "none" : "block";
+        content.style.opacity = (content.style.display === "block") ? "1" : "0";
     }
 </script>
 
