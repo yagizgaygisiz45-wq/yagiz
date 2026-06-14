@@ -2,67 +2,65 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yağız Stüdyo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Yağız Dash - Ana Sayfa</title>
     <style>
-        :root { --neon-purple: #9d4edd; --neon-blue: #00f2ff; }
-        
-        body { 
-            /* Arka plan: Koyu bir renk üzerine teknolojik bir görsel veya gradient */
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
-                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-attachment: fixed;
-            color: white; 
-            font-family: 'Segoe UI', sans-serif; 
-            margin: 0; padding: 20px;
-        }
-
-        .hero { text-align: center; padding: 60px 0; }
-        
-        .project-card { 
-            background: rgba(20, 20, 20, 0.7); /* Cam efekti için hafif şeffaf */
-            backdrop-filter: blur(15px); 
-            border: 1px solid rgba(255,255,255,0.1); 
-            padding: 25px; 
-            border-radius: 20px; 
-            margin-bottom: 20px; 
-            position: relative;
-        }
-
-        .project-card::before { 
-            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; 
-            background: var(--neon-purple); border-radius: 5px; 
-        }
-
-        .status { 
-            background: rgba(255, 204, 0, 0.2); color: #ffcc00; 
-            padding: 5px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: bold;
-        }
+        /* SİTE VE OYUN TASARIMI */
+        * { box-sizing: border-box; user-select: none; margin: 0; padding: 0; }
+        body { background: #020208; font-family: sans-serif; color: #fff; overflow: hidden; }
+        #gameCanvas { display: block; width: 100vw; height: 100vh; }
+        .screen { position: absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#020208; z-index:10; }
+        .hidden { display: none !important; }
+        h1 { color: #00f2ff; font-size: 3rem; margin-bottom: 20px; text-shadow: 0 0 10px #00f2ff; }
+        .btn { background: #00f2ff; color: #000; padding: 15px 40px; border-radius: 30px; font-weight: bold; cursor: pointer; border: none; font-size: 1.5rem; }
     </style>
 </head>
 <body>
 
-<div class="hero">
-    <h1>YAĞIZ STÜDYO</h1>
-    <p style="color: var(--neon-blue);">Dijital Oyun & Yapay Zeka Geliştirme</p>
-</div>
-
-<div id="projeler">
-    <h2 style="border-left: 4px solid var(--neon-purple); padding-left: 15px;">🎮 Oyunlarımız</h2>
-    
-    <div class="project-card">
-        <span class="status">YAKINDA GELECEK</span>
-        <h3 style="margin-top:15px;">Proje 1</h3>
-        <p style="color: #ccc;">Oyun motoru optimizasyonları ve yapay zeka entegrasyonu tamamlanmak üzere.</p>
+    <div id="mainMenu" class="screen">
+        <h1>YAĞIZ DASH</h1>
+        <button class="btn" onclick="startGame()">OYUNA GİR</button>
     </div>
 
-    <div class="project-card">
-        <span class="status">YAKINDA GELECEK</span>
-        <h3 style="margin-top:15px;">Proje 2</h3>
-        <p style="color: #ccc;">Yeni bir deneyim için hazırlık yapıyoruz. Beklemede kal!</p>
-    </div>
-</div>
+    <canvas id="gameCanvas" class="hidden"></canvas>
 
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        const menu = document.getElementById("mainMenu");
+        
+        let inGame = false;
+        let player = { x: 100, y: 300, dy: 0, size: 40 };
+
+        function startGame() {
+            menu.classList.add("hidden");
+            canvas.classList.remove("hidden");
+            inGame = true;
+            requestAnimationFrame(gameLoop);
+        }
+
+        function gameLoop() {
+            if (!inGame) return;
+            ctx.fillStyle = "#020208";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Basit oyuncu çizimi
+            ctx.fillStyle = "#00f2ff";
+            ctx.fillRect(player.x, player.y, player.size, player.size);
+            
+            requestAnimationFrame(gameLoop);
+        }
+
+        window.addEventListener("touchstart", () => {
+            if(inGame) player.y -= 50; // Basit atlama
+        });
+        
+        window.addEventListener("resize", () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    </script>
 </body>
 </html>
