@@ -2,65 +2,142 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Yağız Dash - Ana Sayfa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Yağız Dash</title>
     <style>
-        /* SİTE VE OYUN TASARIMI */
-        * { box-sizing: border-box; user-select: none; margin: 0; padding: 0; }
-        body { background: #020208; font-family: sans-serif; color: #fff; overflow: hidden; }
-        #gameCanvas { display: block; width: 100vw; height: 100vh; }
-        .screen { position: absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#020208; z-index:10; }
+        * { box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; }
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; background: #020208; overflow: hidden; font-family: 'Segoe UI', Roboto, sans-serif; color: #fff; }
+        canvas { display: block; width: 100vw; height: 100vh; background: #050510; }
+        .screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(6, 6, 20, 0.98); z-index: 10; padding: 20px; }
         .hidden { display: none !important; }
-        h1 { color: #00f2ff; font-size: 3rem; margin-bottom: 20px; text-shadow: 0 0 10px #00f2ff; }
-        .btn { background: #00f2ff; color: #000; padding: 15px 40px; border-radius: 30px; font-weight: bold; cursor: pointer; border: none; font-size: 1.5rem; }
+        h1 { color: #00f2ff; font-size: 2.2rem; margin: 0 0 10px 0; text-shadow: 0 0 15px rgba(0, 242, 255, 0.6); text-align: center; }
+        .currency { color: #ffcc00; font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; text-shadow: 0 0 10px rgba(255, 204, 0, 0.4); }
+        .btn { background: rgba(0, 242, 255, 0.1); border: 2px solid #00f2ff; color: #00f2ff; padding: 14px 40px; font-size: 1.3rem; font-weight: bold; border-radius: 25px; cursor: pointer; margin: 10px; transition: 0.2s; box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); }
+        .btn:active { background: #00f2ff; color: #000; }
+        .level-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; width: 100%; max-width: 360px; margin: 10px 0 20px 0; }
+        .level-card { background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(0, 242, 255, 0.3); aspect-ratio: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.9rem; transition: 0.2s; }
+        .level-card:active { background: #00f2ff; color: #000; border-color: #00f2ff; }
+        .level-card .record { font-size: 0.65rem; color: #ff0055; margin-top: 2px; }
+        .level-card.locked { background: rgba(40, 40, 50, 0.4); border-color: rgba(255, 255, 255, 0.1); color: #666; cursor: not-allowed; }
+        .shop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: 100%; max-width: 360px; margin-bottom: 20px; }
+        .shop-item { background: rgba(255, 255, 255, 0.03); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; align-items: center; cursor: pointer; }
+        .shop-item.owned { border-color: #00ff66; }
+        .shop-item.selected { border-color: #00f2ff; background: rgba(0, 242, 255, 0.1); }
+        .preview-box { width: 35px; height: 35px; border-radius: 6px; margin-bottom: 6px; }
+        .price-tag { font-size: 0.8rem; color: #ffcc00; font-weight: bold; }
+        #hud { position: absolute; top: 20px; width: 100%; display: flex; justify-content: space-between; padding: 0 20px; color: #00f2ff; font-size: 1.1rem; font-weight: bold; pointer-events: none; z-index: 5; }
     </style>
 </head>
 <body>
-
-    <div id="mainMenu" class="screen">
-        <h1>YAĞIZ DASH</h1>
-        <button class="btn" onclick="startGame()">OYUNA GİR</button>
+    <div id="hud" class="hidden">
+        <div id="hudLevel">BÖLÜM: 1</div>
+        <div id="hudProgress">İLERLEME: %0</div>
+        <div id="hudStars">⭐ 0</div>
     </div>
-
-    <canvas id="gameCanvas" class="hidden"></canvas>
-
+    <div id="mainMenu" class="screen">
+        <h1 style="font-size: 3rem; margin-bottom: 30px;">YAĞIZ DASH</h1>
+        <button class="btn" onclick="pressStart()">OYUNA BAŞLA</button>
+    </div>
+    <div id="levelMenu" class="screen hidden">
+        <h1>BÖLÜM SEÇ</h1>
+        <div class="currency" id="menuStars">TOPLAM YILDIZ: ⭐ 0</div>
+        <div class="level-grid" id="levelGrid"></div>
+        <button class="btn" style="border-color: #9d4edd; color: #9d4edd; padding: 10px 25px;" onclick="openShop()">MAĞAZA</button>
+    </div>
+    <div id="shopMenu" class="screen hidden">
+        <h1>MAĞAZA</h1>
+        <div class="currency" id="shopStars">YILDIZIN: ⭐ 0</div>
+        <div class="shop-grid" id="shopGrid"></div>
+        <button class="btn" onclick="closeShop()">GERİ</button>
+    </div>
+    <canvas id="gameCanvas"></canvas>
     <script>
         const canvas = document.getElementById("gameCanvas");
         const ctx = canvas.getContext("2d");
-        const menu = document.getElementById("mainMenu");
-        
-        let inGame = false;
-        let player = { x: 100, y: 300, dy: 0, size: 40 };
-
-        function startGame() {
-            menu.classList.add("hidden");
-            canvas.classList.remove("hidden");
-            inGame = true;
-            requestAnimationFrame(gameLoop);
+        let gameData = { stars: 0, currentSkin: "#00ff66", ownedSkins: ["#00ff66"], records: Array(30).fill(0), unlockedLevel: 0 };
+        try { let loaded = localStorage.getItem("yagizDashData"); if (loaded) gameData = JSON.parse(loaded); } catch(e) {}
+        function saveGame() { try { localStorage.setItem("yagizDashData", JSON.stringify(gameData)); } catch(e) {} }
+        const skins = [{ color: "#00ff66", price: 0 }, { color: "#00f2ff", price: 5 }, { color: "#ff0055", price: 12 }, { color: "#ffcc00", price: 20 }];
+        function generateLevelData(lvlNum) {
+            let objects = [], currentX = 300;
+            for (let i = 0; i < 15 + lvlNum; i++) {
+                currentX += 220 + Math.random() * 120 - (lvlNum * 2);
+                let r = Math.random() * 100;
+                if (r < 35) { objects.push({ type: 'spike', x: currentX, size: 35 }); }
+                else if (r < 70) { let blockW = 80 + Math.random() * 50, blockH = 40 + Math.floor(Math.random() * 3) * 15; objects.push({ type: 'block', x: currentX, w: blockW, h: blockH }); objects.push({ type: 'star', x: currentX + blockW/2 - 10, y: blockH + 40 }); currentX += blockW; }
+                else { objects.push({ type: 'star', x: currentX, y: 40 }); }
+            }
+            objects.push({ type: 'flag', x: currentX + 400 });
+            return { length: currentX + 600, objects: objects };
         }
-
-        function gameLoop() {
-            if (!inGame) return;
-            ctx.fillStyle = "#020208";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Basit oyuncu çizimi
-            ctx.fillStyle = "#00f2ff";
-            ctx.fillRect(player.x, player.y, player.size, player.size);
-            
-            requestAnimationFrame(gameLoop);
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize); resize();
+        let currentLevel = 0, activeLevelData = null, inGame = false, isGameOver = false, deathTimer = 0, collectedStarsInRun = 0, levelProgress = 0, cameraX = 0, groundY = Math.floor(window.innerHeight * 0.7), gameSpeed = 7;
+        let player = { x: 100, y: 0, size: 38, dy: 0, jumpForce: 13, gravity: 0.72, isJumping: false, rotation: 0 };
+        let gameObjects = [], particles = [];
+        window.pressStart = function() { document.getElementById("mainMenu").classList.add("hidden"); document.getElementById("levelMenu").classList.remove("hidden"); buildLevelMenu(); };
+        function buildLevelMenu() {
+            document.getElementById("menuStars").innerText = "TOPLAM YILDIZ: ⭐ " + gameData.stars;
+            const grid = document.getElementById("levelGrid"); grid.innerHTML = "";
+            for (let i = 0; i < 30; i++) {
+                let card = document.createElement("div");
+                if (i > gameData.unlockedLevel) { card.className = "level-card locked"; card.innerHTML = `<div>Lvl ${i+1}</div>`; }
+                else { card.className = "level-card"; card.innerHTML = `<div>Lvl ${i+1}</div><div class="record">%${gameData.records[i]}</div>`; card.onclick = () => loadAndStartLevel(i); }
+                grid.appendChild(card);
+            }
         }
-
-        window.addEventListener("touchstart", () => {
-            if(inGame) player.y -= 50; // Basit atlama
-        });
-        
-        window.addEventListener("resize", () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        window.openShop = function() { document.getElementById("levelMenu").classList.add("hidden"); document.getElementById("shopMenu").classList.remove("hidden"); buildShopMenu(); };
+        window.closeShop = function() { document.getElementById("shopMenu").classList.add("hidden"); document.getElementById("levelMenu").classList.remove("hidden"); buildLevelMenu(); };
+        function buildShopMenu() {
+            document.getElementById("shopStars").innerText = "YILDIZIN: ⭐ " + gameData.stars;
+            const grid = document.getElementById("shopGrid"); grid.innerHTML = "";
+            skins.forEach(s => {
+                let isOwned = gameData.ownedSkins.includes(s.color), isSelected = gameData.currentSkin === s.color, item = document.createElement("div");
+                item.className = `shop-item ${isOwned ? 'owned' : ''} ${isSelected ? 'selected' : ''}`;
+                item.innerHTML = `<div class="preview-box" style="background: ${s.color};"></div><div class="price-tag">${isOwned ? (isSelected ? 'SEÇİLİ' : 'SAHİPSİN') : '⭐ ' + s.price}</div>`;
+                item.onclick = () => { if (isOwned) { gameData.currentSkin = s.color; } else if (gameData.stars >= s.price) { gameData.stars -= s.price; gameData.ownedSkins.push(s.color); gameData.currentSkin = s.color; } saveGame(); buildShopMenu(); };
+                grid.appendChild(item);
+            });
+        }
+        function loadAndStartLevel(lvlIdx) {
+            currentLevel = lvlIdx; activeLevelData = generateLevelData(lvlIdx); gameObjects = JSON.parse(JSON.stringify(activeLevelData.objects));
+            document.getElementById("levelMenu").classList.add("hidden"); document.getElementById("hud").classList.remove("hidden");
+            document.getElementById("hudLevel").innerText = "BÖLÜM: " + (currentLevel + 1);
+            inGame = true; player.y = groundY - player.size; player.dy = 0; player.isJumping = false; cameraX = 0; collectedStarsInRun = 0; isGameOver = false;
+        }
+        function triggerDeath() { if (isGameOver) return; isGameOver = true; setTimeout(() => { inGame = false; document.getElementById("hud").classList.add("hidden"); document.getElementById("levelMenu").classList.remove("hidden"); buildLevelMenu(); }, 900); }
+        function triggerWin() { if (isGameOver) return; isGameOver = true; gameData.stars += collectedStarsInRun; if (currentLevel === gameData.unlockedLevel) gameData.unlockedLevel++; saveGame(); alert("TEBRİKLER!"); inGame = false; document.getElementById("hud").classList.add("hidden"); document.getElementById("levelMenu").classList.remove("hidden"); buildLevelMenu(); }
+        function update() {
+            if (!inGame || isGameOver) return;
+            player.x += gameSpeed; cameraX = player.x - 150; player.dy += player.gravity; player.y += player.dy;
+            if (player.isJumping) player.rotation += 0.08;
+            let onPlatform = false;
+            gameObjects.forEach((obj, idx) => {
+                if (obj.type === 'block' && player.x + player.size > obj.x && player.x < obj.x + obj.w && player.y + player.size >= groundY - obj.h && player.y + player.size - player.dy <= groundY - obj.h + 12) { player.y = groundY - obj.h - player.size; player.dy = 0; player.isJumping = false; onPlatform = true; }
+                else if (obj.type === 'spike' && player.x + player.size > obj.x && player.x < obj.x + obj.size && player.y + player.size > groundY - obj.size) triggerDeath();
+                else if (obj.type === 'star' && player.x + player.size > obj.x && player.x < obj.x + 24 && player.y + player.size > groundY - obj.y) { collectedStarsInRun++; gameObjects.splice(idx, 1); }
+                else if (obj.type === 'flag' && player.x >= obj.x) triggerWin();
+            });
+            if (!onPlatform && player.y + player.size >= groundY) { player.y = groundY - player.size; player.dy = 0; player.isJumping = false; }
+        }
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (inGame) {
+                ctx.save(); ctx.translate(-cameraX, 0);
+                ctx.fillStyle = "#03030d"; ctx.fillRect(cameraX, 0, canvas.width, canvas.height);
+                gameObjects.forEach(obj => {
+                    if (obj.type === 'block') { ctx.fillStyle = "#9d4edd"; ctx.fillRect(obj.x, groundY - obj.h, obj.w, obj.h); }
+                    else if (obj.type === 'spike') { ctx.fillStyle = "#ff0055"; ctx.beginPath(); ctx.moveTo(obj.x, groundY); ctx.lineTo(obj.x+obj.size/2, groundY-obj.size); ctx.lineTo(obj.x+obj.size, groundY); ctx.fill(); }
+                    else if (obj.type === 'star') { ctx.fillStyle = "#ffcc00"; ctx.fillRect(obj.x, groundY-obj.y, 20, 20); }
+                    else if (obj.type === 'flag') { ctx.fillStyle = "#00ff66"; ctx.fillRect(obj.x, groundY-100, 10, 100); }
+                });
+                ctx.fillStyle = gameData.currentSkin; ctx.fillRect(player.x, player.y, player.size, player.size);
+                ctx.restore();
+            }
+            update(); requestAnimationFrame(draw);
+        }
+        window.addEventListener("touchstart", (e) => { if (inGame && !player.isJumping) { player.dy = -player.jumpForce; player.isJumping = true; } e.preventDefault(); }, {passive: false});
+        draw();
     </script>
 </body>
 </html>
