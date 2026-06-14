@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe - Yağız Oyun</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            color: white;
+            margin-top: 0;
+        }
+        .status {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 20px;
+            height: 30px;
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            max-width: 300px;
+            margin: 20px auto;
+            background: #333;
+            padding: 5px;
+            border-radius: 10px;
+        }
+        .cell {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 5px;
+            font-size: 36px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .cell:hover {
+            transform: scale(0.95);
+        }
+        .cell:disabled {
+            cursor: default;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px 5px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .btn-reset {
+            background-color: #ff6b6b;
+        }
+        .btn-reset:hover {
+            background-color: #ff5252;
+        }
+        .score {
+            color: white;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⭕ Tic Tac Toe</h1>
+        <div class="status" id="status">Oyuncu başlasın (X)</div>
+        
+        <div class="board">
+            <button class="cell" data-index="0"></button>
+            <button class="cell" data-index="1"></button>
+            <button class="cell" data-index="2"></button>
+            <button class="cell" data-index="3"></button>
+            <button class="cell" data-index="4"></button>
+            <button class="cell" data-index="5"></button>
+            <button class="cell" data-index="6"></button>
+            <button class="cell" data-index="7"></button>
+            <button class="cell" data-index="8"></button>
+        </div>
+        
+        <div class="score">
+            Senin Kazanışın: <strong id="playerWins">0</strong> | Bilgisayarın Kazanışı: <strong id="computerWins">0</strong>
+        </div>
+        
+        <br>
+        <button class="btn btn-reset" onclick="resetGame()">Yeniden Başla</button>
+        <button class="btn" onclick="location.href='../index.html'">Geri Dön</button>
+    </div>
+
+    <script>
+        const cells = document.querySelectorAll('.cell');
+        const statusDisplay = document.getElementById('status');
+        let board = ['', '', '', '', '', '', '', '', ''];
+        let playerWins = 0;
+        let computerWins = 0;
+        let gameActive = true;
+        let currentPlayer = 'X';
+        
+        const winConditions = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+        
+        cells.forEach(cell => {
+            cell.addEventListener('click', playerMove);
+        });
+        
+        function playerMove(e) {
+            if (!gameActive || currentPlayer !== 'X') return;
+            
+            const index = e.target.dataset.index;
+            if (board[index] !== '') return;
+            
+            board[index] = 'X';
+            e.target.textContent = 'X';
+            e.target.disabled = true;
+            
+            if (checkWin('X')) {
+                statusDisplay.textContent = '🎉 Kazandın!';
+                gameActive = false;
+                playerWins++;
+                document.getElementById('playerWins').textContent = playerWins;
+                return;
+            }
+            
+            if (board.every(cell => cell !== '')) {
+                statusDisplay.textContent = '🤝 Berabere!';
+                gameActive = false;
+                return;
+            }
+            
+            currentPlayer = 'O';
+            statusDisplay.textContent = 'Bilgisayar düşünüyor...';
+            setTimeout(computerMove, 500);
+        }
+        
+        function computerMove() {
+            if (!gameActive) return;
+            
+            // Simple AI
+            let emptyIndices = board.map((cell, idx) => cell === '' ? idx : null).filter(val => val !== null);
+            let index;
+            
+            // Check if computer can win
+            for (let condition of winConditions) {
+                let [a, b, c] = condition;
+                if (board[a] === 'O' && board[b] === 'O' && board[c] === '') {
+                    index = c;
+                } else if (board[a] === 'O' && board[c] === 'O' && board[b] === '') {
+                    index = b;
+                } else if (board[b] === 'O' && board[c] === 'O' && board[a] === '') {
+                    index = a;
+                }
+            }
+            
+            // Block player from winning
+            if (index === undefined) {
+                for (let condition of winConditions) {
+                    let [a, b, c] = condition;
+                    if (board[a] === 'X' && board[b] === 'X' && board[c] === '') {
+                        index = c;
+                    } else if (board[a] === 'X' && board[c] === 'X' && board[b] === '') {
+                        index = b;
+                    } else if (board[b] === 'X' && board[c] === 'X' && board[a] === '') {
+                        index = a;
+                    }
+                }
+            }
+            
+            // Random move
+            if (index === undefined) {
+                index = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
+            }
+            
+            board[index] = 'O';
+            cells[index].textContent = 'O';
+            cells[index].disabled = true;
+            
+            if (checkWin('O')) {
+                statusDisplay.textContent = '😔 Bilgisayar Kazandı!';
+                gameActive = false;
+                computerWins++;
+                document.getElementById('computerWins').textContent = computerWins;
+                return;
+            }
+            
+            if (board.every(cell => cell !== '')) {
+                statusDisplay.textContent = '🤝 Berabere!';
+                gameActive = false;
+                return;
+            }
+            
+            currentPlayer = 'X';
+            statusDisplay.textContent = 'Senin sıran (X)';
+        }
+        
+        function checkWin(player) {
+            return winConditions.some(condition => {
+                return condition.every(index => board[index] === player);
+            });
+        }
+        
+        function resetGame() {
+            board = ['', '', '', '', '', '', '', '', ''];
+            gameActive = true;
+            currentPlayer = 'X';
+            statusDisplay.textContent = 'Oyuncu başlasın (X)';
+            cells.forEach(cell => {
+                cell.textContent = '';
+                cell.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>

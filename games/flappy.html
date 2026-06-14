@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird Klon - Yağız Oyun</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        canvas {
+            background: #87CEEB;
+            display: block;
+            margin: 20px auto;
+            border: 3px solid white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: white;
+            margin-top: 0;
+        }
+        .score {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .instructions {
+            color: white;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐦 Flappy Bird Klon</h1>
+        <div class="instructions">CLICK veya SPACE tuşuna basarak uç!</div>
+        <div class="score">Skor: <span id="score">0</span></div>
+        <canvas id="canvas" width="320" height="480"></canvas>
+        <br>
+        <button class="btn" onclick="location.href='../index.html'">Geri Dön</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let bird = {
+            x: 50,
+            y: 150,
+            width: 20,
+            height: 20,
+            dy: 0,
+            gravity: 0.6,
+            lift: -15
+        };
+        
+        let pipes = [];
+        let score = 0;
+        let gameOver = false;
+        let pipeCounter = 0;
+        
+        function update() {
+            // Gravity
+            bird.dy += bird.gravity;
+            bird.y += bird.dy;
+            
+            // Game over if bird hits ground or top
+            if (bird.y + bird.height > canvas.height || bird.y < 0) {
+                gameOver = true;
+            }
+            
+            // Create pipes
+            pipeCounter++;
+            if (pipeCounter % 90 === 0) {
+                let gapSize = 100;
+                let pipeY = Math.random() * (canvas.height - gapSize - 50) + 25;
+                pipes.push({
+                    x: canvas.width,
+                    y: pipeY,
+                    width: 50,
+                    height: pipeY,
+                    gap: gapSize
+                });
+            }
+            
+            // Update pipes
+            for (let i = pipes.length - 1; i >= 0; i--) {
+                pipes[i].x -= 5;
+                
+                // Check collision
+                if (bird.x + bird.width > pipes[i].x && 
+                    bird.x < pipes[i].x + pipes[i].width) {
+                    if (bird.y < pipes[i].height || 
+                        bird.y + bird.height > pipes[i].height + pipes[i].gap) {
+                        gameOver = true;
+                    }
+                }
+                
+                // Score point
+                if (pipes[i].x === bird.x - 5) {
+                    score++;
+                    document.getElementById('score').textContent = score;
+                }
+                
+                // Remove pipes
+                if (pipes[i].x < -100) {
+                    pipes.splice(i, 1);
+                }
+            }
+        }
+        
+        function draw() {
+            // Sky
+            ctx.fillStyle = '#87CEEB';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Bird
+            ctx.fillStyle = '#FFD700';
+            ctx.fillRect(bird.x, bird.y, bird.width, bird.height);
+            
+            // Pipes
+            ctx.fillStyle = '#228B22';
+            pipes.forEach(pipe => {
+                ctx.fillRect(pipe.x, 0, pipe.width, pipe.height);
+                ctx.fillRect(pipe.x, pipe.height + pipe.gap, pipe.width, canvas.height);
+            });
+            
+            // Game over
+            if (gameOver) {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'white';
+                ctx.font = '30px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2 - 20);
+                ctx.font = '20px Arial';
+                ctx.fillText('Skor: ' + score, canvas.width / 2, canvas.height / 2 + 20);
+            }
+        }
+        
+        function gameLoop() {
+            if (!gameOver) {
+                update();
+            }
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+        
+        // Event listeners
+        document.addEventListener('click', () => {
+            if (!gameOver) {
+                bird.dy = bird.lift;
+            } else {
+                location.reload();
+            }
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                if (!gameOver) {
+                    bird.dy = bird.lift;
+                } else {
+                    location.reload();
+                }
+            }
+        });
+        
+        gameLoop();
+    </script>
+</body>
+</html>

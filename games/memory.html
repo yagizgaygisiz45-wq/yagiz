@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hafıza Oyunu - Yağız Oyun</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            color: white;
+            margin-top: 0;
+        }
+        .info {
+            color: white;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .card {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: 2px solid white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            user-select: none;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card.flipped {
+            background: white;
+            color: black;
+        }
+        .card.matched {
+            background: #4CAF50;
+            color: white;
+            cursor: default;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px 5px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .btn-reset {
+            background-color: #ff6b6b;
+        }
+        .btn-reset:hover {
+            background-color: #ff5252;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧩 Hafıza Oyunu</h1>
+        <div class="info">Eşleştiren çiftleri bul! Hamle: <span id="moves">0</span></div>
+        
+        <div class="game-board" id="gameBoard"></div>
+        
+        <br>
+        <button class="btn btn-reset" onclick="resetGame()">Yeniden Başla</button>
+        <button class="btn" onclick="location.href='../index.html'">Geri Dön</button>
+    </div>
+
+    <script>
+        const emojis = ['🍎', '🍌', '🍊', '🍇', '🍓', '🍒', '🍑', '🍍'];
+        let cards = [];
+        let flipped = [];
+        let matched = [];
+        let moves = 0;
+        let lockBoard = false;
+        
+        function initGame() {
+            const gameBoard = document.getElementById('gameBoard');
+            gameBoard.innerHTML = '';
+            
+            // Create pairs
+            cards = [...emojis, ...emojis];
+            cards.sort(() => Math.random() - 0.5);
+            
+            cards.forEach((emoji, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.textContent = '❓';
+                card.dataset.value = emoji;
+                card.dataset.index = index;
+                card.onclick = () => flipCard(card);
+                gameBoard.appendChild(card);
+            });
+        }
+        
+        function flipCard(card) {
+            if (lockBoard || flipped.includes(card) || matched.includes(card.dataset.value)) return;
+            
+            card.classList.add('flipped');
+            card.textContent = card.dataset.value;
+            flipped.push(card);
+            
+            if (flipped.length === 2) {
+                checkMatch();
+            }
+        }
+        
+        function checkMatch() {
+            lockBoard = true;
+            moves++;
+            document.getElementById('moves').textContent = moves;
+            
+            const [card1, card2] = flipped;
+            const isMatch = card1.dataset.value === card2.dataset.value;
+            
+            if (isMatch) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matched.push(card1.dataset.value);
+                flipped = [];
+                lockBoard = false;
+                
+                if (matched.length === emojis.length) {
+                    setTimeout(() => {
+                        alert(`Tebrikler! ${moves} hamlede kazandın!`);
+                    }, 500);
+                }
+            } else {
+                setTimeout(() => {
+                    card1.classList.remove('flipped');
+                    card2.classList.remove('flipped');
+                    card1.textContent = '❓';
+                    card2.textContent = '❓';
+                    flipped = [];
+                    lockBoard = false;
+                }, 1000);
+            }
+        }
+        
+        function resetGame() {
+            cards = [];
+            flipped = [];
+            matched = [];
+            moves = 0;
+            lockBoard = false;
+            document.getElementById('moves').textContent = '0';
+            initGame();
+        }
+        
+        initGame();
+    </script>
+</body>
+</html>
