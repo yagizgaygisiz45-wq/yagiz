@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Yağız ve Kaygısız tarafından yapılan oyunlar. Eğlenceli web oyunlarını oyna!">
     <meta name="keywords" content="oyun, web oyunu, flash oyun, HTML5 oyun, Yağız oyun">
-    <title>Yağız Oyun - Web Oyunları</title>
+    <title>🎮 Yağız Oyun - Web Oyunları</title>
     <style>
         * {
             margin: 0;
@@ -13,10 +13,40 @@
             box-sizing: border-box;
         }
 
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            min-height: 100vh;
         }
 
         .container {
@@ -28,27 +58,50 @@
         header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 30px 0;
+            padding: 40px 0;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            animation: slideIn 0.8s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: float 20s linear infinite;
         }
 
         header h1 {
-            font-size: 2.5em;
+            font-size: 3em;
             margin-bottom: 5px;
+            animation: pulse 2s infinite;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .subtitle {
-            font-size: 1.1em;
+            font-size: 1.2em;
             opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
 
         .navbar {
-            background-color: #333;
+            background: rgba(51, 51, 51, 0.95);
             padding: 15px 0;
             position: sticky;
             top: 0;
             z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .navbar ul {
@@ -56,18 +109,23 @@
             list-style: none;
             justify-content: center;
             gap: 30px;
+            flex-wrap: wrap;
         }
 
         .navbar a {
             color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
             cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 20px;
         }
 
         .navbar a:hover {
-            color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
         }
 
         main {
@@ -77,6 +135,7 @@
         section {
             padding: 60px 0;
             display: none;
+            animation: fadeIn 0.8s ease;
         }
 
         section.active {
@@ -87,36 +146,71 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>');
+            animation: float 30s linear infinite;
         }
 
         .hero h2 {
-            font-size: 2.5em;
+            font-size: 2.8em;
             margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .hero p {
             font-size: 1.2em;
             margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
         }
 
         .btn {
             display: inline-block;
-            background-color: #4CAF50;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
             color: white;
             padding: 12px 30px;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 25px;
             font-weight: bold;
             transition: all 0.3s;
             border: none;
             cursor: pointer;
             font-size: 1em;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.3);
+            transition: left 0.3s;
         }
 
         .btn:hover {
-            background-color: #45a049;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-small {
@@ -124,73 +218,111 @@
             font-size: 0.9em;
         }
 
-        .btn.disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-
-        .btn.disabled:hover {
-            background-color: #ccc;
-            transform: none;
-        }
-
         .games {
-            background-color: #f4f4f4;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            position: relative;
+        }
+
+        .games::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255,255,255,0.05);
+            pointer-events: none;
         }
 
         .games h2 {
             text-align: center;
-            font-size: 2em;
-            margin-bottom: 40px;
-            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            color: white;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
         }
 
         .game-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 25px;
+            position: relative;
+            z-index: 1;
         }
 
         .game-card {
             background: white;
-            border-radius: 10px;
-            padding: 20px;
+            border-radius: 15px;
+            padding: 25px;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .game-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: #667eea;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
 
         .game-image {
-            font-size: 3em;
+            font-size: 4em;
             margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+            display: inline-block;
         }
 
         .game-card h3 {
             font-size: 1.3em;
             margin-bottom: 10px;
             color: #333;
+            font-weight: 600;
         }
 
         .game-card p {
             color: #666;
             margin-bottom: 15px;
+            line-height: 1.5;
         }
 
         .about {
             text-align: center;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            position: relative;
+            overflow: hidden;
         }
 
         .about h2 {
-            font-size: 2em;
+            font-size: 2.5em;
             margin-bottom: 30px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .about p {
@@ -200,11 +332,12 @@
         }
 
         footer {
-            background-color: #333;
+            background-color: #1a1a1a;
             color: white;
             text-align: center;
-            padding: 20px 0;
+            padding: 25px 0;
             margin-top: 40px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.3);
         }
 
         footer p {
@@ -215,138 +348,158 @@
         .game-container {
             text-align: center;
             color: white;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            padding: 40px 0;
+            min-height: 100vh;
         }
 
         .game-container h2 {
             color: white;
             margin-top: 20px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            font-size: 2.2em;
         }
 
         .game-info {
             color: white;
             font-size: 18px;
             margin-bottom: 20px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
-        /* Flappy Bird */
         canvas {
-            border: 3px solid white;
+            border: 4px solid white;
             border-radius: 10px;
             display: block;
             margin: 20px auto;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.1);
         }
 
-        /* Dice Game */
         .dice-container {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
+            gap: 30px;
+            margin: 30px 0;
             flex-wrap: wrap;
         }
 
         .dice {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: 3px solid #333;
-            border-radius: 10px;
+            border: 4px solid white;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 60px;
             color: white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            animation: float 3s ease-in-out infinite;
         }
 
         .game-board {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            max-width: 400px;
-            margin: 20px auto;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+            gap: 12px;
+            max-width: 450px;
+            margin: 30px auto;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
         }
 
         .card {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: 2px solid white;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 40px;
+            font-size: 35px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
             user-select: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .card:hover {
-            transform: scale(1.05);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
 
         .card.flipped {
             background: white;
             color: black;
+            transform: rotateY(180deg);
         }
 
         .card.matched {
-            background: #4CAF50;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
             color: white;
             cursor: default;
+            animation: pulse 0.6s;
         }
 
         .board {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 5px;
-            max-width: 300px;
-            margin: 20px auto;
-            background: #333;
-            padding: 5px;
-            border-radius: 10px;
+            gap: 10px;
+            max-width: 350px;
+            margin: 30px auto;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
         }
 
         .cell {
-            width: 90px;
-            height: 90px;
+            width: 100px;
+            height: 100px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            border-radius: 5px;
-            font-size: 36px;
+            border: 2px solid white;
+            border-radius: 10px;
+            font-size: 40px;
             cursor: pointer;
             color: white;
             font-weight: bold;
             transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .cell:hover {
-            transform: scale(0.95);
-        }
-
-        .cell:disabled {
-            cursor: default;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
 
         .score-area {
-            margin: 20px 0;
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .score {
             font-size: 18px;
-            margin: 10px 0;
+            margin: 12px 0;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
         .result {
-            font-size: 18px;
+            font-size: 20px;
             margin: 20px 0;
             font-weight: bold;
             min-height: 30px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
         .status {
@@ -354,17 +507,34 @@
             font-size: 20px;
             margin-bottom: 20px;
             height: 30px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn-reset {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+        }
+
+        .btn-back {
+            background: linear-gradient(135deg, #008CBA 0%, #007399 100%);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
             .navbar ul {
                 flex-direction: column;
                 gap: 10px;
-            }
-            
-            header h1 {
-                font-size: 1.8em;
             }
             
             .hero h2 {
@@ -372,8 +542,31 @@
             }
             
             .game-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                grid-template-columns: 1fr;
                 gap: 20px;
+            }
+
+            .game-card {
+                padding: 15px;
+            }
+
+            .game-image {
+                font-size: 2.5em;
+            }
+
+            .board {
+                max-width: 280px;
+            }
+
+            .cell {
+                width: 80px;
+                height: 80px;
+                font-size: 30px;
+            }
+
+            canvas {
+                max-width: 100%;
+                height: auto;
             }
         }
     </style>
@@ -389,9 +582,9 @@
     <nav class="navbar">
         <div class="container">
             <ul>
-                <li><a onclick="showSection('anasayfa')">Anasayfa</a></li>
-                <li><a onclick="showSection('oyunlar')">Oyunlar</a></li>
-                <li><a onclick="showSection('hakkimizda')">Hakkımızda</a></li>
+                <li><a onclick="showSection('anasayfa')">🏠 Anasayfa</a></li>
+                <li><a onclick="showSection('oyunlar')">🎮 Oyunlar</a></li>
+                <li><a onclick="showSection('hakkimizda')">ℹ️ Hakkımızda</a></li>
             </ul>
         </div>
     </nav>
@@ -400,20 +593,22 @@
         <!-- ANASAYFA -->
         <section id="anasayfa" class="hero active">
             <div class="container">
-                <h2>Hoşgeldiniz!</h2>
-                <p>En eğlenceli oyunları buradan oynayabilirsiniz. Her gün yeni oyunlar ekleniyor!</p>
-                <a onclick="showSection('oyunlar')" class="btn">Oyunlara Başla</a>
+                <h2>🎉 Hoşgeldiniz!</h2>
+                <p>En eğlenceli oyunları buradan oynayabilirsiniz!</p>
+                <p style="font-size: 0.95em; opacity: 0.85;">20+ Harika Oyun Seni Bekliyor!</p>
+                <br>
+                <a onclick="showSection('oyunlar')" class="btn">🚀 Oyunlara Başla</a>
             </div>
         </section>
 
         <!-- OYUNLAR -->
         <section id="oyunlar" class="games">
             <div class="container">
-                <h2>Oyunlarımız</h2>
+                <h2>🎮 Oyunlarımız</h2>
                 <div class="game-grid">
                     <div class="game-card" onclick="startGame('flappy')">
                         <div class="game-image">🎯</div>
-                        <h3>Flappy Bird Klon</h3>
+                        <h3>Flappy Bird</h3>
                         <p>Kuşu engellerin arasından geçir!</p>
                         <button class="btn btn-small">Oyna</button>
                     </div>
@@ -421,28 +616,147 @@
                     <div class="game-card" onclick="startGame('snake')">
                         <div class="game-image">🐍</div>
                         <h3>Snake Oyunu</h3>
-                        <p>Klasik yılan oyununu oyna ve en yüksek skoru yap!</p>
+                        <p>Klasik yılan oyununu oyna!</p>
                         <button class="btn btn-small">Oyna</button>
                     </div>
 
                     <div class="game-card" onclick="startGame('dice')">
                         <div class="game-image">🎲</div>
-                        <h3>Zar Atma Oyunu</h3>
-                        <p>Bilgisayara karşı zar at ve kazanmaya çalış!</p>
+                        <h3>Zar Atma</h3>
+                        <p>Bilgisayara karşı zar at!</p>
                         <button class="btn btn-small">Oyna</button>
                     </div>
 
                     <div class="game-card" onclick="startGame('memory')">
                         <div class="game-image">🧩</div>
                         <h3>Hafıza Oyunu</h3>
-                        <p>Eşleştiren kartları bul ve kazanmaya çalış!</p>
+                        <p>Çiftleri eşleştir!</p>
                         <button class="btn btn-small">Oyna</button>
                     </div>
 
                     <div class="game-card" onclick="startGame('tictactoe')">
                         <div class="game-image">⭕</div>
                         <h3>Tic Tac Toe</h3>
-                        <p>Bilgisayara karşı Tic Tac Toe oyna!</p>
+                        <p>Bilgisayara karşı oyna!</p>
+                        <button class="btn btn-small">Oyna</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('breakout')">
+                        <div class="game-image">🧱</div>
+                        <h3>Breakout</h3>
+                        <p>Tuğlaları kır!</p>
+                        <button class="btn btn-small">Oyna</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('pong')">
+                        <div class="game-image">🏓</div>
+                        <h3>Pong</h3>
+                        <p>Klasik Pong oyunu!</p>
+                        <button class="btn btn-small">Oyna</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('quiz')">
+                        <div class="game-image">❓</div>
+                        <h3>Quiz Oyunu</h3>
+                        <p>Bilgi testine gir!</p>
+                        <button class="btn btn-small">Oyna</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('simon')">
+                        <div class="game-image">🌈</div>
+                        <h3>Simon Says</h3>
+                        <p>Renkler oyununu oyna!</p>
+                        <button class="btn btn-small">Oyna</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('rockpaper')">
+                        <div class="game-image">✂️</div>
+                        <h3>Taş Kağıt Makas</h3>
+                        <p>Bilgisayarı yenmeye çalış!</p>
+                        <button class="btn btn-small">Oyna</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('2048')">
+                        <div class="game-image">2️⃣</div>
+                        <h3>2048 Oyunu</h3>
+                        <p>Sayıları birleştir!</p>
+                        <button class="btn btn-small">Oyna</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('jumpy')">
+                        <div class="game-image">🐸</div>
+                        <h3>Jumpy Frog</h3>
+                        <p>Kurbağayı trafik üstünden atla!</p>
+                        <button class="btn btn-small">Oyna</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('spaceshooter')">
+                        <div class="game-image">🚀</div>
+                        <h3>Space Shooter</h3>
+                        <p>Uzay düşmanlarını vur!</p>
+                        <button class="btn btn-small">Oyna</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('hangman')">
+                        <div class="game-image">🎯</div>
+                        <h3>Hangman</h3>
+                        <p>Kelimeyi tahmin et!</p>
+                        <button class="btn btn-small">Oyna</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('tetris')">
+                        <div class="game-image">🧩</div>
+                        <h3>Tetris</h3>
+                        <p>Blokları diz!</p>
+                        <button class="btn btn-small">Oyna</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('mine')">
+                        <div class="game-image">💣</div>
+                        <h3>Mines</h3>
+                        <p>Mayınları açma!</p>
+                        <button class="btn btn-small">Oyna</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('runner')">
+                        <div class="game-image">🏃</div>
+                        <h3>Runner</h3>
+                        <p>Engelleri atla ve koş!</p>
+                        <button class="btn btn-small">Oyna</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('clicker')">
+                        <div class="game-image">👆</div>
+                        <h3>Clicker</h3>
+                        <p>Butona tıkla ve kazan!</p>
+                        <button class="btn btn-small">Oyna</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('catch')">
+                        <div class="game-image">🎁</div>
+                        <h3>Catch</h3>
+                        <p>Düşen hediyeler yakala!</p>
+                        <button class="btn btn-small">Oyna</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('guessnum')">
+                        <div class="game-image">🔢</div>
+                        <h3>Sayı Tahmin</h3>
+                        <p>1-100 arası sayı tahmin et!</p>
+                        <button class="btn btn-small">Oyna</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('whackmole')">
+                        <div class="game-image">🔨</div>
+                        <h3>Whack a Mole</h3>
+                        <p>Fare vur!</p>
+                        <button class="btn btn-small">Oyna</button>
+                    </div>
+
+                    <div class="game-card" onclick="startGame('matchpairs')">
+                        <div class="game-image">🎪</div>
+                        <h3>Match Pairs</h3>
+                        <p>Resim eşleştirme!</p>
                         <button class="btn btn-small">Oyna</button>
                     </div>
                 </div>
@@ -450,34 +764,33 @@
         </section>
 
         <!-- FLAPPY BIRD -->
-        <section id="flappy" class="game-container" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <section id="flappy" class="game-container">
             <div class="container">
-                <h2>🎯 Flappy Bird Klon</h2>
-                <div class="game-info">CLICK veya SPACE tuşuna basarak uç!</div>
-                <div class="game-info">Skor: <span id="flappy-score">0</span></div>
+                <h2>🎯 Flappy Bird</h2>
+                <div class="game-info">CLICK veya SPACE tuşuna basarak uç! | Skor: <span id="flappy-score">0</span></div>
                 <canvas id="flappy-canvas" width="320" height="480"></canvas>
-                <br>
-                <button class="btn" onclick="showSection('oyunlar')">Oyunlara Dön</button>
+                <div class="btn-group">
+                    <button class="btn" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
             </div>
         </section>
 
         <!-- SNAKE -->
-        <section id="snake" class="game-container" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <section id="snake" class="game-container">
             <div class="container">
                 <h2>🐍 Snake Oyunu</h2>
-                <div class="game-info">Ok tuşlarını kullanarak yılanı kontrol et!</div>
-                <div class="game-info">Skor: <span id="snake-score">0</span> | Uzunluk: <span id="snake-length">3</span></div>
+                <div class="game-info">Ok tuşları ile kontrol et! | Skor: <span id="snake-score">0</span> | Uzunluk: <span id="snake-length">3</span></div>
                 <canvas id="snake-canvas" width="400" height="400"></canvas>
-                <br>
-                <button class="btn" onclick="showSection('oyunlar')">Oyunlara Dön</button>
+                <div class="btn-group">
+                    <button class="btn" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
             </div>
         </section>
 
-        <!-- DICE GAME -->
-        <section id="dice" class="game-container" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <!-- DICE -->
+        <section id="dice" class="game-container">
             <div class="container">
-                <h2>🎲 Zar Atma Oyunu</h2>
-                
+                <h2>🎲 Zar Atma</h2>
                 <div class="dice-container">
                     <div>
                         <h3>Senin Zarın</h3>
@@ -488,40 +801,37 @@
                         <div class="dice" id="computerDice">🎲</div>
                     </div>
                 </div>
-                
                 <div class="result" id="dice-result"></div>
-                
                 <div class="score-area">
                     <div class="score">Senin Skorun: <strong id="dicePlayerScore">0</strong></div>
                     <div class="score">Bilgisayarın Skoru: <strong id="diceComputerScore">0</strong></div>
                 </div>
-                
-                <button class="btn" onclick="playDiceGame()">Zar At (Oyna)</button>
-                <button class="btn" style="background-color: #ff6b6b; margin-left: 10px;" onclick="resetDiceGame()">Yeniden Başla</button>
-                <button class="btn" style="background-color: #008CBA; margin-left: 10px;" onclick="showSection('oyunlar')">Oyunlara Dön</button>
+                <div class="btn-group">
+                    <button class="btn" onclick="playDiceGame()">🎲 Zar At</button>
+                    <button class="btn btn-reset" onclick="resetDiceGame()">🔄 Yeniden Başla</button>
+                    <button class="btn btn-back" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
             </div>
         </section>
 
-        <!-- MEMORY GAME -->
-        <section id="memory" class="game-container" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <!-- MEMORY -->
+        <section id="memory" class="game-container">
             <div class="container">
                 <h2>🧩 Hafıza Oyunu</h2>
                 <div class="game-info">Eşleştiren çiftleri bul! Hamle: <span id="memory-moves">0</span></div>
-                
                 <div class="game-board" id="gameBoard"></div>
-                
-                <br>
-                <button class="btn" style="background-color: #ff6b6b;" onclick="resetMemoryGame()">Yeniden Başla</button>
-                <button class="btn" style="margin-left: 10px;" onclick="showSection('oyunlar')">Oyunlara Dön</button>
+                <div class="btn-group">
+                    <button class="btn btn-reset" onclick="resetMemoryGame()">🔄 Yeniden Başla</button>
+                    <button class="btn btn-back" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
             </div>
         </section>
 
         <!-- TIC TAC TOE -->
-        <section id="tictactoe" class="game-container" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <section id="tictactoe" class="game-container">
             <div class="container">
                 <h2>⭕ Tic Tac Toe</h2>
                 <div class="status" id="ttt-status">Oyuncu başlasın (X)</div>
-                
                 <div class="board">
                     <button class="cell" data-index="0"></button>
                     <button class="cell" data-index="1"></button>
@@ -533,31 +843,288 @@
                     <button class="cell" data-index="7"></button>
                     <button class="cell" data-index="8"></button>
                 </div>
-                
                 <div class="score-area">
                     <div class="score">Senin Kazanışın: <strong id="tttPlayerWins">0</strong></div>
                     <div class="score">Bilgisayarın Kazanışı: <strong id="tttComputerWins">0</strong></div>
                 </div>
-                
-                <br>
-                <button class="btn" style="background-color: #ff6b6b;" onclick="resetTTTGame()">Yeniden Başla</button>
-                <button class="btn" style="margin-left: 10px;" onclick="showSection('oyunlar')">Oyunlara Dön</button>
+                <div class="btn-group">
+                    <button class="btn btn-reset" onclick="resetTTTGame()">🔄 Yeniden Başla</button>
+                    <button class="btn btn-back" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- BREAKOUT -->
+        <section id="breakout" class="game-container">
+            <div class="container">
+                <h2>🧱 Breakout</h2>
+                <div class="game-info">Tuğlaları kır! | Skor: <span id="breakout-score">0</span></div>
+                <canvas id="breakout-canvas" width="400" height="400"></canvas>
+                <div class="game-info" style="font-size: 14px;">Mouse ile kürekle kontrol et!</div>
+                <div class="btn-group">
+                    <button class="btn" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PONG -->
+        <section id="pong" class="game-container">
+            <div class="container">
+                <h2>🏓 Pong</h2>
+                <div class="game-info">Ok tuşları ile oyna! | Senin: <span id="pong-player">0</span> - Bilgisayar: <span id="pong-computer">0</span></div>
+                <canvas id="pong-canvas" width="400" height="300"></canvas>
+                <div class="game-info" style="font-size: 14px;">⬆️ Yukarı ⬇️ Aşağı</div>
+                <div class="btn-group">
+                    <button class="btn" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUIZ -->
+        <section id="quiz" class="game-container">
+            <div class="container">
+                <h2>❓ Quiz Oyunu</h2>
+                <div class="score-area">
+                    <div class="score" id="quiz-question">Soru yükleniyor...</div>
+                    <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px;" id="quiz-options"></div>
+                </div>
+                <div class="score-area" style="margin-top: 20px;">
+                    <div class="score">Skor: <strong id="quiz-score">0</strong> / 10</div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-reset" onclick="startQuiz()">🔄 Yeniden Başla</button>
+                    <button class="btn btn-back" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SIMON -->
+        <section id="simon" class="game-container">
+            <div class="container">
+                <h2>🌈 Simon Says</h2>
+                <div class="game-info">Renkler dizisini hatırla! Level: <span id="simon-level">1</span></div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; max-width: 300px; margin: 30px auto;">
+                    <div style="width: 130px; height: 130px; background: #ff6b6b; border-radius: 10px; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.3);" id="simon-red" onclick="simonClick(0)"></div>
+                    <div style="width: 130px; height: 130px; background: #4ecdc4; border-radius: 10px; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.3);" id="simon-green" onclick="simonClick(1)"></div>
+                    <div style="width: 130px; height: 130px; background: #ffe66d; border-radius: 10px; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.3);" id="simon-yellow" onclick="simonClick(2)"></div>
+                    <div style="width: 130px; height: 130px; background: #95e1d3; border-radius: 10px; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.3);" id="simon-blue" onclick="simonClick(3)"></div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn" onclick="startSimon()">▶️ Başla</button>
+                    <button class="btn btn-reset" onclick="resetSimon()">🔄 Yeniden Başla</button>
+                    <button class="btn btn-back" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROCK PAPER SCISSORS -->
+        <section id="rockpaper" class="game-container">
+            <div class="container">
+                <h2>✂️ Taş Kağıt Makas</h2>
+                <div style="display: flex; justify-content: center; gap: 20px; margin: 30px 0; flex-wrap: wrap;">
+                    <button class="btn" onclick="playRockPaper('taş')" style="font-size: 1.3em;">🪨 Taş</button>
+                    <button class="btn" onclick="playRockPaper('kağıt')" style="font-size: 1.3em;">📄 Kağıt</button>
+                    <button class="btn" onclick="playRockPaper('makas')" style="font-size: 1.3em;">✂️ Makas</button>
+                </div>
+                <div class="result" id="rp-result"></div>
+                <div class="score-area">
+                    <div class="score">Senin: <strong id="rp-player">0</strong></div>
+                    <div class="score">Bilgisayar: <strong id="rp-computer">0</strong></div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-reset" onclick="resetRockPaper()">🔄 Yeniden Başla</button>
+                    <button class="btn btn-back" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2048 -->
+        <section id="2048" class="game-container">
+            <div class="container">
+                <h2>2️⃣ 2048 Oyunu</h2>
+                <div class="game-info">Ok tuşları ile oyna! Skor: <span id="game2048-score">0</span></div>
+                <div id="game2048" style="max-width: 320px; margin: 30px auto;"></div>
+                <div class="btn-group">
+                    <button class="btn btn-reset" onclick="reset2048()">🔄 Yeniden Başla</button>
+                    <button class="btn btn-back" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- JUMPY FROG -->
+        <section id="jumpy" class="game-container">
+            <div class="container">
+                <h2>🐸 Jumpy Frog</h2>
+                <div class="game-info">Ok tuşları ile atla! Skor: <span id="jumpy-score">0</span></div>
+                <canvas id="jumpy-canvas" width="320" height="400"></canvas>
+                <div class="btn-group">
+                    <button class="btn" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPACE SHOOTER -->
+        <section id="spaceshooter" class="game-container">
+            <div class="container">
+                <h2>🚀 Space Shooter</h2>
+                <div class="game-info">Ok tuşları + SPACE! Skor: <span id="space-score">0</span></div>
+                <canvas id="space-canvas" width="320" height="480"></canvas>
+                <div class="btn-group">
+                    <button class="btn" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- HANGMAN -->
+        <section id="hangman" class="game-container">
+            <div class="container">
+                <h2>🎯 Hangman</h2>
+                <div class="game-info">Kelimeyi tahmin et!</div>
+                <div class="score-area">
+                    <div class="score" id="hangman-word" style="font-size: 28px; letter-spacing: 10px;">_ _ _ _ _ _</div>
+                    <div class="score" style="margin-top: 20px;">Kalan Hak: <strong id="hangman-chances">6</strong></div>
+                    <div class="score">Tahmin Ettiğin Harfler: <strong id="hangman-guessed"></strong></div>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 20px 0;" id="hangman-buttons"></div>
+                <div class="btn-group">
+                    <button class="btn btn-reset" onclick="startHangman()">🔄 Yeniden Başla</button>
+                    <button class="btn btn-back" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TETRIS -->
+        <section id="tetris" class="game-container">
+            <div class="container">
+                <h2>🧩 Tetris</h2>
+                <div class="game-info">Ok tuşları + SPACE! Skor: <span id="tetris-score">0</span></div>
+                <canvas id="tetris-canvas" width="200" height="400"></canvas>
+                <div class="game-info" style="font-size: 14px;">⬅️ ➡️ Hareket | ⬇️ Hızlan | SPACE Döndür</div>
+                <div class="btn-group">
+                    <button class="btn" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- MINES -->
+        <section id="mine" class="game-container">
+            <div class="container">
+                <h2>💣 Mines</h2>
+                <div class="game-info">Mayınlara tıklama! Skor: <span id="mine-score">0</span></div>
+                <div id="minesboard" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; max-width: 300px; margin: 30px auto;"></div>
+                <div class="btn-group">
+                    <button class="btn btn-reset" onclick="startMines()">🔄 Yeniden Başla</button>
+                    <button class="btn btn-back" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- RUNNER -->
+        <section id="runner" class="game-container">
+            <div class="container">
+                <h2>🏃 Runner</h2>
+                <div class="game-info">Engelleri atla! Skor: <span id="runner-score">0</span></div>
+                <canvas id="runner-canvas" width="320" height="400"></canvas>
+                <div class="game-info" style="font-size: 14px;">SPACE veya CLICK ile atla!</div>
+                <div class="btn-group">
+                    <button class="btn" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLICKER -->
+        <section id="clicker" class="game-container">
+            <div class="container">
+                <h2>👆 Clicker Oyunu</h2>
+                <div class="game-info">Butona ne kadar çok tıklarsan o kadar kazanırsın!</div>
+                <button style="width: 150px; height: 150px; font-size: 60px; border-radius: 50%; border: 4px solid white; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); cursor: pointer; transition: all 0.2s; box-shadow: 0 8px 25px rgba(0,0,0,0.3); margin: 30px auto; display: block;" id="clicker-btn" onclick="clickerClick()">👆</button>
+                <div class="score-area">
+                    <div class="score">Skor: <strong id="clicker-score">0</strong></div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-reset" onclick="resetClicker()">🔄 Yeniden Başla</button>
+                    <button class="btn btn-back" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATCH -->
+        <section id="catch" class="game-container">
+            <div class="container">
+                <h2>🎁 Catch Oyunu</h2>
+                <div class="game-info">Hediyeler yakala! Skor: <span id="catch-score">0</span></div>
+                <canvas id="catch-canvas" width="320" height="400"></canvas>
+                <div class="btn-group">
+                    <button class="btn" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- GUESS NUMBER -->
+        <section id="guessnum" class="game-container">
+            <div class="container">
+                <h2>🔢 Sayı Tahmin</h2>
+                <div class="score-area">
+                    <div class="score" id="guessnum-hint">1-100 arası sayı tahmin et!</div>
+                    <div style="margin-top: 20px;">
+                        <input type="number" id="guessnum-input" min="1" max="100" placeholder="Sayı gir..." style="padding: 10px; font-size: 16px; border-radius: 5px; border: none; width: 100%; max-width: 200px;">
+                    </div>
+                    <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                        <button class="btn" onclick="guessNumber()">Tahmin Et</button>
+                    </div>
+                </div>
+                <div class="score-area" style="margin-top: 20px;">
+                    <div class="score">Deneme: <strong id="guessnum-tries">0</strong></div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-reset" onclick="startGuessNumber()">🔄 Yeniden Başla</button>
+                    <button class="btn btn-back" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHACK A MOLE -->
+        <section id="whackmole" class="game-container">
+            <div class="container">
+                <h2>🔨 Whack a Mole</h2>
+                <div class="game-info">Farelere vur! Skor: <span id="whack-score">0</span></div>
+                <div id="whackboard" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 300px; margin: 30px auto;"></div>
+                <div class="btn-group">
+                    <button class="btn" id="whack-start" onclick="startWhackMole()">▶️ Başla</button>
+                    <button class="btn btn-reset" onclick="resetWhackMole()">🔄 Yeniden Başla</button>
+                    <button class="btn btn-back" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- MATCH PAIRS -->
+        <section id="matchpairs" class="game-container">
+            <div class="container">
+                <h2>🎪 Match Pairs</h2>
+                <div class="game-info">Resim eşleştir! Hamle: <span id="matchpairs-moves">0</span></div>
+                <div class="game-board" id="matchpairsBoard"></div>
+                <div class="btn-group">
+                    <button class="btn btn-reset" onclick="resetMatchPairs()">🔄 Yeniden Başla</button>
+                    <button class="btn btn-back" onclick="showSection('oyunlar')">⬅️ Oyunlara Dön</button>
+                </div>
             </div>
         </section>
 
         <!-- HAKKIMIZDA -->
         <section id="hakkimizda" class="about">
             <div class="container">
-                <h2>Hakkımızda</h2>
-                <p>Biz Yağız ve Kaygısız, yazılım geliştirme ve oyun tasarımı konusunda tutkulu iki geliştirici. Bu sitede kendi yaptığımız oyunları paylaşıyoruz.</p>
+                <h2>ℹ️ Hakkımızda</h2>
+                <p>Biz Yağız ve Kaygısız, yazılım geliştirme ve oyun tasarımı konusunda tutkulu iki geliştirici.</p>
+                <p>Bu sitede kendi yaptığımız 20+ oyunu paylaşıyoruz.</p>
                 <p>Oyunlarımız tamamen ücretsiz ve açık kaynaklı. Eğlenmek için geliştirilmiştir!</p>
+                <p style="margin-top: 30px; font-size: 0.9em; opacity: 0.8;">Telefondan oynamak için optimize edilmiştir! 📱✨</p>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Yağız Oyun. Tüm hakları saklıdır. | Yağız & Kaygısız tarafından yapıldı</p>
+            <p>&copy; 2026 Yağız Oyun | Yapay Zeka ile Geliştirildi ✨</p>
         </div>
     </footer>
 
@@ -568,316 +1135,64 @@
             sections.forEach(section => section.classList.remove('active'));
             document.getElementById(sectionId).classList.add('active');
             window.scrollTo(0, 0);
-
-            if (sectionId === 'flappy') {
-                setTimeout(initFlappyBird, 100);
-            } else if (sectionId === 'snake') {
-                setTimeout(initSnakeGame, 100);
-            } else if (sectionId === 'memory') {
-                setTimeout(initMemoryGame, 100);
-            } else if (sectionId === 'tictactoe') {
-                setTimeout(initTTTGame, 100);
-            }
         }
 
         function startGame(gameName) {
             showSection(gameName);
         }
 
-        // ==================== FLAPPY BIRD ====================
-        let flappyInitialized = false;
-        function initFlappyBird() {
-            if (flappyInitialized) return;
-            flappyInitialized = true;
-
-            const canvas = document.getElementById('flappy-canvas');
-            const ctx = canvas.getContext('2d');
-            
-            let bird = {
-                x: 50,
-                y: 150,
-                width: 20,
-                height: 20,
-                dy: 0,
-                gravity: 0.6,
-                lift: -15
-            };
-            
-            let pipes = [];
-            let score = 0;
-            let gameOver = false;
-            let pipeCounter = 0;
-            
-            function update() {
-                bird.dy += bird.gravity;
-                bird.y += bird.dy;
-                
-                if (bird.y + bird.height > canvas.height || bird.y < 0) {
-                    gameOver = true;
-                }
-                
-                pipeCounter++;
-                if (pipeCounter % 90 === 0) {
-                    let gapSize = 100;
-                    let pipeY = Math.random() * (canvas.height - gapSize - 50) + 25;
-                    pipes.push({
-                        x: canvas.width,
-                        y: pipeY,
-                        width: 50,
-                        height: pipeY,
-                        gap: gapSize
-                    });
-                }
-                
-                for (let i = pipes.length - 1; i >= 0; i--) {
-                    pipes[i].x -= 5;
-                    
-                    if (bird.x + bird.width > pipes[i].x && 
-                        bird.x < pipes[i].x + pipes[i].width) {
-                        if (bird.y < pipes[i].height || 
-                            bird.y + bird.height > pipes[i].height + pipes[i].gap) {
-                            gameOver = true;
-                        }
-                    }
-                    
-                    if (pipes[i].x === bird.x - 5) {
-                        score++;
-                        document.getElementById('flappy-score').textContent = score;
-                    }
-                    
-                    if (pipes[i].x < -100) {
-                        pipes.splice(i, 1);
-                    }
-                }
-            }
-            
-            function draw() {
-                ctx.fillStyle = '#87CEEB';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                ctx.fillStyle = '#FFD700';
-                ctx.fillRect(bird.x, bird.y, bird.width, bird.height);
-                
-                ctx.fillStyle = '#228B22';
-                pipes.forEach(pipe => {
-                    ctx.fillRect(pipe.x, 0, pipe.width, pipe.height);
-                    ctx.fillRect(pipe.x, pipe.height + pipe.gap, pipe.width, canvas.height);
-                });
-                
-                if (gameOver) {
-                    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    ctx.fillStyle = 'white';
-                    ctx.font = '30px Arial';
-                    ctx.textAlign = 'center';
-                    ctx.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2 - 20);
-                    ctx.font = '20px Arial';
-                    ctx.fillText('Skor: ' + score, canvas.width / 2, canvas.height / 2 + 20);
-                }
-            }
-            
-            function gameLoop() {
-                if (!gameOver) {
-                    update();
-                }
-                draw();
-                requestAnimationFrame(gameLoop);
-            }
-            
-            document.addEventListener('click', flappyClick);
-            document.addEventListener('keydown', flappyKeydown);
-            
-            function flappyClick() {
-                if (!gameOver) {
-                    bird.dy = bird.lift;
-                } else {
-                    location.reload();
-                }
-            }
-            
-            function flappyKeydown(e) {
-                if (e.code === 'Space') {
-                    e.preventDefault();
-                    if (!gameOver) {
-                        bird.dy = bird.lift;
-                    } else {
-                        location.reload();
-                    }
-                }
-            }
-            
-            gameLoop();
+        // ==================== CLICKER ====================
+        let clickerScore = 0;
+        function clickerClick() {
+            clickerScore++;
+            document.getElementById('clicker-score').textContent = clickerScore;
+            const btn = document.getElementById('clicker-btn');
+            btn.style.transform = 'scale(0.9)';
+            setTimeout(() => btn.style.transform = 'scale(1)', 100);
+        }
+        function resetClicker() {
+            clickerScore = 0;
+            document.getElementById('clicker-score').textContent = '0';
         }
 
-        // ==================== SNAKE ====================
-        let snakeInitialized = false;
-        function initSnakeGame() {
-            if (snakeInitialized) return;
-            snakeInitialized = true;
-
-            const canvas = document.getElementById('snake-canvas');
-            const ctx = canvas.getContext('2d');
-            
-            const gridSize = 20;
-            const tileCount = canvas.width / gridSize;
-            
-            let snake = [
-                {x: 10, y: 10},
-                {x: 9, y: 10},
-                {x: 8, y: 10}
-            ];
-            
-            let food = {x: 15, y: 10};
-            let dx = 1, dy = 0;
-            let nextDx = 1, nextDy = 0;
-            let score = 0;
-            let gameOver = false;
-            
-            function update() {
-                if (gameOver) return;
-                
-                dx = nextDx;
-                dy = nextDy;
-                
-                let head = {x: snake[0].x + dx, y: snake[0].y + dy};
-                
-                if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
-                    gameOver = true;
-                    return;
-                }
-                
-                for (let segment of snake) {
-                    if (head.x === segment.x && head.y === segment.y) {
-                        gameOver = true;
-                        return;
-                    }
-                }
-                
-                snake.unshift(head);
-                
-                if (head.x === food.x && head.y === food.y) {
-                    score += 10;
-                    document.getElementById('snake-score').textContent = score;
-                    document.getElementById('snake-length').textContent = snake.length;
-                    
-                    food = {
-                        x: Math.floor(Math.random() * tileCount),
-                        y: Math.floor(Math.random() * tileCount)
-                    };
-                } else {
-                    snake.pop();
-                }
-            }
-            
-            function draw() {
-                ctx.fillStyle = '#1a1a1a';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                ctx.strokeStyle = '#333';
-                ctx.lineWidth = 0.5;
-                for (let i = 0; i <= tileCount; i++) {
-                    ctx.beginPath();
-                    ctx.moveTo(i * gridSize, 0);
-                    ctx.lineTo(i * gridSize, canvas.height);
-                    ctx.stroke();
-                    
-                    ctx.beginPath();
-                    ctx.moveTo(0, i * gridSize);
-                    ctx.lineTo(canvas.width, i * gridSize);
-                    ctx.stroke();
-                }
-                
-                ctx.fillStyle = '#00FF00';
-                for (let i = 0; i < snake.length; i++) {
-                    ctx.fillRect(
-                        snake[i].x * gridSize,
-                        snake[i].y * gridSize,
-                        gridSize - 2,
-                        gridSize - 2
-                    );
-                }
-                
-                ctx.fillStyle = '#FF0000';
-                ctx.fillRect(
-                    food.x * gridSize,
-                    food.y * gridSize,
-                    gridSize - 2,
-                    gridSize - 2
-                );
-                
-                if (gameOver) {
-                    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    ctx.fillStyle = 'white';
-                    ctx.font = '30px Arial';
-                    ctx.textAlign = 'center';
-                    ctx.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2 - 20);
-                    ctx.font = '20px Arial';
-                    ctx.fillText('Skor: ' + score, canvas.width / 2, canvas.height / 2 + 20);
-                }
-            }
-            
-            function gameLoop() {
-                update();
-                draw();
-                setTimeout(gameLoop, 100);
-            }
-            
-            document.addEventListener('keydown', (e) => {
-                switch(e.code) {
-                    case 'ArrowUp':
-                        if (dy === 0) nextDy = -1, nextDx = 0;
-                        break;
-                    case 'ArrowDown':
-                        if (dy === 0) nextDy = 1, nextDx = 0;
-                        break;
-                    case 'ArrowLeft':
-                        if (dx === 0) nextDx = -1, nextDy = 0;
-                        break;
-                    case 'ArrowRight':
-                        if (dx === 0) nextDx = 1, nextDy = 0;
-                        break;
-                }
-                e.preventDefault();
-            });
-            
-            gameLoop();
+        // ==================== GUESS NUMBER ====================
+        let guessnumSecret, guessnumTries = 0;
+        function startGuessNumber() {
+            guessnumSecret = Math.floor(Math.random() * 100) + 1;
+            guessnumTries = 0;
+            document.getElementById('guessnum-tries').textContent = '0';
+            document.getElementById('guessnum-hint').textContent = '1-100 arası sayı tahmin et!';
+            document.getElementById('guessnum-input').value = '';
         }
+        function guessNumber() {
+            const guess = parseInt(document.getElementById('guessnum-input').value);
+            if (!guess) return;
+            guessnumTries++;
+            if (guess === guessnumSecret) {
+                document.getElementById('guessnum-hint').textContent = `🎉 Doğru! ${guessnumTries} denemede buldun!`;
+            } else if (guess < guessnumSecret) {
+                document.getElementById('guessnum-hint').textContent = `📈 Daha yüksek bir sayı dene!`;
+            } else {
+                document.getElementById('guessnum-hint').textContent = `📉 Daha düşük bir sayı dene!`;
+            }
+            document.getElementById('guessnum-tries').textContent = guessnumTries;
+            document.getElementById('guessnum-input').value = '';
+        }
+        startGuessNumber();
 
         // ==================== DICE GAME ====================
-        let dicePlayerScore = 0;
-        let diceComputerScore = 0;
-
+        let dicePlayerScore = 0, diceComputerScore = 0;
         function playDiceGame() {
-            const playerDice = Math.floor(Math.random() * 6) + 1;
-            const computerDice = Math.floor(Math.random() * 6) + 1;
-            
-            const playerDiceElement = document.getElementById('playerDice');
-            const computerDiceElement = document.getElementById('computerDice');
-            const resultElement = document.getElementById('dice-result');
-            
-            playerDiceElement.style.transform = 'rotate(360deg)';
-            computerDiceElement.style.transform = 'rotate(360deg)';
-            
-            playerDiceElement.textContent = playerDice;
-            computerDiceElement.textContent = computerDice;
-            
-            let result = '';
-            if (playerDice > computerDice) {
-                result = '🎉 Kazandın!';
-                dicePlayerScore++;
-            } else if (computerDice > playerDice) {
-                result = '😔 Bilgisayar Kazandı!';
-                diceComputerScore++;
-            } else {
-                result = '🤝 Berabere!';
-            }
-            
-            resultElement.textContent = result + ` (${playerDice} vs ${computerDice})`;
+            const p = Math.floor(Math.random() * 6) + 1;
+            const c = Math.floor(Math.random() * 6) + 1;
+            document.getElementById('playerDice').textContent = p;
+            document.getElementById('computerDice').textContent = c;
+            if (p > c) { dicePlayerScore++; document.getElementById('dice-result').textContent = '🎉 Kazandın! (' + p + ' vs ' + c + ')'; }
+            else if (c > p) { diceComputerScore++; document.getElementById('dice-result').textContent = '😔 Bilgisayar Kazandı! (' + p + ' vs ' + c + ')'; }
+            else { document.getElementById('dice-result').textContent = '🤝 Berabere! (' + p + ' vs ' + c + ')'; }
             document.getElementById('dicePlayerScore').textContent = dicePlayerScore;
             document.getElementById('diceComputerScore').textContent = diceComputerScore;
         }
-
         function resetDiceGame() {
             dicePlayerScore = 0;
             diceComputerScore = 0;
@@ -889,129 +1204,228 @@
         }
 
         // ==================== MEMORY GAME ====================
-        let memoryInitialized = false;
         let memoryEmojis = ['🍎', '🍌', '🍊', '🍋', '🍓', '🍒', '🍑', '🍍'];
-        let memoryCards = [];
-        let memoryFlipped = [];
-        let memoryMatched = [];
-        let memoryMoves = 0;
-        let memoryLockBoard = false;
-
+        let memoryCards = [], memoryFlipped = [], memoryMatched = [], memoryMoves = 0, memoryLock = false;
         function initMemoryGame() {
-            if (memoryInitialized) return;
-            memoryInitialized = true;
-            resetMemoryGame();
-        }
-
-        function resetMemoryGame() {
-            const gameBoard = document.getElementById('gameBoard');
-            gameBoard.innerHTML = '';
-            
+            const board = document.getElementById('gameBoard');
+            board.innerHTML = '';
             memoryCards = [...memoryEmojis, ...memoryEmojis];
             memoryCards.sort(() => Math.random() - 0.5);
-            
-            memoryFlipped = [];
-            memoryMatched = [];
-            memoryMoves = 0;
-            memoryLockBoard = false;
+            memoryFlipped = []; memoryMatched = []; memoryMoves = 0; memoryLock = false;
             document.getElementById('memory-moves').textContent = '0';
-            
-            memoryCards.forEach((emoji, index) => {
+            memoryCards.forEach((emoji, i) => {
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.textContent = '❓';
                 card.dataset.value = emoji;
-                card.dataset.index = index;
-                card.onclick = () => flipMemoryCard(card);
-                gameBoard.appendChild(card);
+                card.onclick = () => flipMemCard(card);
+                board.appendChild(card);
             });
         }
-
-        function flipMemoryCard(card) {
-            if (memoryLockBoard || memoryFlipped.includes(card) || memoryMatched.includes(card.dataset.value)) return;
-            
+        function flipMemCard(card) {
+            if (memoryLock || memoryFlipped.includes(card) || memoryMatched.includes(card.dataset.value)) return;
             card.classList.add('flipped');
             card.textContent = card.dataset.value;
             memoryFlipped.push(card);
-            
-            if (memoryFlipped.length === 2) {
-                checkMemoryMatch();
-            }
+            if (memoryFlipped.length === 2) checkMemoryMatch();
         }
-
         function checkMemoryMatch() {
-            memoryLockBoard = true;
+            memoryLock = true;
             memoryMoves++;
             document.getElementById('memory-moves').textContent = memoryMoves;
-            
-            const [card1, card2] = memoryFlipped;
-            const isMatch = card1.dataset.value === card2.dataset.value;
-            
-            if (isMatch) {
-                card1.classList.add('matched');
-                card2.classList.add('matched');
-                memoryMatched.push(card1.dataset.value);
+            const [c1, c2] = memoryFlipped;
+            if (c1.dataset.value === c2.dataset.value) {
+                c1.classList.add('matched');
+                c2.classList.add('matched');
+                memoryMatched.push(c1.dataset.value);
                 memoryFlipped = [];
-                memoryLockBoard = false;
-                
-                if (memoryMatched.length === memoryEmojis.length) {
-                    setTimeout(() => {
-                        alert(`Tebrikler! ${memoryMoves} hamlede kazandın!`);
-                    }, 500);
-                }
+                memoryLock = false;
+                if (memoryMatched.length === memoryEmojis.length) alert(`🎉 Kazandın! ${memoryMoves} hamlede!`);
             } else {
                 setTimeout(() => {
-                    card1.classList.remove('flipped');
-                    card2.classList.remove('flipped');
-                    card1.textContent = '❓';
-                    card2.textContent = '❓';
+                    c1.classList.remove('flipped');
+                    c2.classList.remove('flipped');
+                    c1.textContent = '❓';
+                    c2.textContent = '❓';
                     memoryFlipped = [];
-                    memoryLockBoard = false;
-                }, 1000);
+                    memoryLock = false;
+                }, 800);
             }
+        }
+        function resetMemoryGame() { initMemoryGame(); }
+        
+        // Sayfa yükleme olayı
+        document.addEventListener('DOMContentLoaded', () => {
+            const section = document.getElementById('memory');
+            if (section && section.classList.contains('active')) initMemoryGame();
+        });
+
+        // ==================== ROCK PAPER SCISSORS ====================
+        let rpPlayer = 0, rpComputer = 0;
+        function playRockPaper(choice) {
+            const choices = ['taş', 'kağıt', 'makas'];
+            const computer = choices[Math.floor(Math.random() * 3)];
+            let result = '';
+            if (choice === computer) result = '🤝 Berabere!';
+            else if ((choice === 'taş' && computer === 'makas') || (choice === 'kağıt' && computer === 'taş') || (choice === 'makas' && computer === 'kağıt')) {
+                result = '🎉 Kazandın!'; rpPlayer++;
+            } else {
+                result = '😔 Bilgisayar Kazandı!'; rpComputer++;
+            }
+            document.getElementById('rp-result').textContent = result + ` (Senin: ${choice} vs Bilgisayar: ${computer})`;
+            document.getElementById('rp-player').textContent = rpPlayer;
+            document.getElementById('rp-computer').textContent = rpComputer;
+        }
+        function resetRockPaper() {
+            rpPlayer = 0; rpComputer = 0;
+            document.getElementById('rp-player').textContent = '0';
+            document.getElementById('rp-computer').textContent = '0';
+            document.getElementById('rp-result').textContent = '';
+        }
+
+        // ==================== FLAPPY BIRD ====================
+        let flappyInit = false;
+        document.addEventListener('click', (e) => {
+            if (document.getElementById('flappy').classList.contains('active') && !flappyInit) {
+                flappyInit = true;
+                initFlappyBird();
+            }
+        });
+        function initFlappyBird() {
+            const canvas = document.getElementById('flappy-canvas');
+            const ctx = canvas.getContext('2d');
+            let bird = { x: 50, y: 150, width: 20, height: 20, dy: 0, gravity: 0.6, lift: -15 };
+            let pipes = [], score = 0, gameOver = false, pipeCounter = 0;
+            
+            function update() {
+                bird.dy += bird.gravity; bird.y += bird.dy;
+                if (bird.y + bird.height > canvas.height || bird.y < 0) gameOver = true;
+                pipeCounter++;
+                if (pipeCounter % 90 === 0) {
+                    let gap = 100, py = Math.random() * (canvas.height - gap - 50) + 25;
+                    pipes.push({ x: canvas.width, y: py, width: 50, height: py, gap });
+                }
+                pipes = pipes.filter(p => p.x > -100);
+                pipes.forEach(p => {
+                    p.x -= 5;
+                    if (bird.x + bird.width > p.x && bird.x < p.x + p.width) {
+                        if (bird.y < p.height || bird.y + bird.height > p.height + p.gap) gameOver = true;
+                    }
+                    if (p.x === bird.x - 5) { score++; document.getElementById('flappy-score').textContent = score; }
+                });
+            }
+            function draw() {
+                ctx.fillStyle = '#87CEEB';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#FFD700';
+                ctx.fillRect(bird.x, bird.y, bird.width, bird.height);
+                ctx.fillStyle = '#228B22';
+                pipes.forEach(p => {
+                    ctx.fillRect(p.x, 0, p.width, p.height);
+                    ctx.fillRect(p.x, p.height + p.gap, p.width, canvas.height);
+                });
+                if (gameOver) {
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.fillStyle = 'white';
+                    ctx.font = '30px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2 - 20);
+                    ctx.font = '20px Arial';
+                    ctx.fillText('Skor: ' + score, canvas.width / 2, canvas.height / 2 + 20);
+                }
+            }
+            function gameLoop() {
+                if (!gameOver) update();
+                draw();
+                requestAnimationFrame(gameLoop);
+            }
+            document.addEventListener('click', () => { if (!gameOver) bird.dy = bird.lift; });
+            document.addEventListener('keydown', (e) => { if (e.code === 'Space' && !gameOver) bird.dy = bird.lift; });
+            gameLoop();
+        }
+
+        // ==================== SNAKE ====================
+        let snakeInit = false;
+        document.addEventListener('keydown', () => {
+            if (document.getElementById('snake').classList.contains('active') && !snakeInit) {
+                snakeInit = true;
+                initSnakeGame();
+            }
+        });
+        function initSnakeGame() {
+            const canvas = document.getElementById('snake-canvas');
+            const ctx = canvas.getContext('2d');
+            const gridSize = 20, tileCount = canvas.width / gridSize;
+            let snake = [{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }];
+            let food = { x: 15, y: 10 }, dx = 1, dy = 0, nextDx = 1, nextDy = 0, score = 0, gameOver = false;
+            
+            function update() {
+                if (gameOver) return;
+                dx = nextDx; dy = nextDy;
+                let head = { x: snake[0].x + dx, y: snake[0].y + dy };
+                if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) gameOver = true;
+                if (snake.some(s => s.x === head.x && s.y === head.y)) gameOver = true;
+                snake.unshift(head);
+                if (head.x === food.x && head.y === food.y) {
+                    score += 10;
+                    food = { x: Math.floor(Math.random() * tileCount), y: Math.floor(Math.random() * tileCount) };
+                } else snake.pop();
+                document.getElementById('snake-score').textContent = score;
+                document.getElementById('snake-length').textContent = snake.length;
+            }
+            function draw() {
+                ctx.fillStyle = '#1a1a1a';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 0.5;
+                for (let i = 0; i <= tileCount; i++) {
+                    ctx.beginPath(); ctx.moveTo(i * gridSize, 0); ctx.lineTo(i * gridSize, canvas.height); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(0, i * gridSize); ctx.lineTo(canvas.width, i * gridSize); ctx.stroke();
+                }
+                ctx.fillStyle = '#00FF00';
+                snake.forEach(s => ctx.fillRect(s.x * gridSize, s.y * gridSize, gridSize - 2, gridSize - 2));
+                ctx.fillStyle = '#FF0000';
+                ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize - 2, gridSize - 2);
+                if (gameOver) {
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.fillStyle = 'white';
+                    ctx.font = '30px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2 - 20);
+                }
+            }
+            function gameLoop() {
+                update();
+                draw();
+                setTimeout(gameLoop, 100);
+            }
+            document.addEventListener('keydown', (e) => {
+                if (e.code === 'ArrowUp' && dy === 0) { nextDy = -1; nextDx = 0; }
+                else if (e.code === 'ArrowDown' && dy === 0) { nextDy = 1; nextDx = 0; }
+                else if (e.code === 'ArrowLeft' && dx === 0) { nextDx = -1; nextDy = 0; }
+                else if (e.code === 'ArrowRight' && dx === 0) { nextDx = 1; nextDy = 0; }
+            });
+            gameLoop();
         }
 
         // ==================== TIC TAC TOE ====================
-        let tttInitialized = false;
         let tttBoard = ['', '', '', '', '', '', '', '', ''];
-        let tttPlayerWins = 0;
-        let tttComputerWins = 0;
-        let tttGameActive = true;
-        let tttCurrentPlayer = 'X';
-        
-        const winConditions = [
-            [0, 1, 2],
-            [3, 4, 5],
-            [6, 7, 8],
-            [0, 3, 6],
-            [1, 4, 7],
-            [2, 5, 8],
-            [0, 4, 8],
-            [2, 4, 6]
-        ];
-
+        let tttPlayerWins = 0, tttComputerWins = 0, tttGameActive = true, tttCurrentPlayer = 'X';
+        const winConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
         function initTTTGame() {
-            if (tttInitialized) return;
-            tttInitialized = true;
-
-            const cells = document.querySelectorAll('#tictactoe .cell');
-            cells.forEach(cell => {
+            document.querySelectorAll('#tictactoe .cell').forEach(cell => {
                 cell.addEventListener('click', tttPlayerMove);
             });
-            
-            resetTTTGame();
         }
-
         function tttPlayerMove(e) {
             if (!tttGameActive || tttCurrentPlayer !== 'X') return;
-            
             const index = e.target.dataset.index;
             if (tttBoard[index] !== '') return;
-            
             tttBoard[index] = 'X';
             e.target.textContent = 'X';
             e.target.disabled = true;
-            
             if (tttCheckWin('X')) {
                 document.getElementById('ttt-status').textContent = '🎉 Kazandın!';
                 tttGameActive = false;
@@ -1019,57 +1433,37 @@
                 document.getElementById('tttPlayerWins').textContent = tttPlayerWins;
                 return;
             }
-            
-            if (tttBoard.every(cell => cell !== '')) {
+            if (tttBoard.every(c => c !== '')) {
                 document.getElementById('ttt-status').textContent = '🤝 Berabere!';
                 tttGameActive = false;
                 return;
             }
-            
             tttCurrentPlayer = 'O';
             document.getElementById('ttt-status').textContent = 'Bilgisayar düşünüyor...';
             setTimeout(tttComputerMove, 500);
         }
-
         function tttComputerMove() {
             if (!tttGameActive) return;
-            
-            let emptyIndices = tttBoard.map((cell, idx) => cell === '' ? idx : null).filter(val => val !== null);
+            let empty = tttBoard.map((c, i) => c === '' ? i : null).filter(i => i !== null);
             let index;
-            
-            for (let condition of winConditions) {
-                let [a, b, c] = condition;
-                if (tttBoard[a] === 'O' && tttBoard[b] === 'O' && tttBoard[c] === '') {
-                    index = c;
-                } else if (tttBoard[a] === 'O' && tttBoard[c] === 'O' && tttBoard[b] === '') {
-                    index = b;
-                } else if (tttBoard[b] === 'O' && tttBoard[c] === 'O' && tttBoard[a] === '') {
-                    index = a;
+            for (let cond of winConditions) {
+                let [a, b, c] = cond;
+                if (tttBoard[a] === 'O' && tttBoard[b] === 'O' && tttBoard[c] === '') index = c;
+                else if (tttBoard[a] === 'O' && tttBoard[c] === 'O' && tttBoard[b] === '') index = b;
+                else if (tttBoard[b] === 'O' && tttBoard[c] === 'O' && tttBoard[a] === '') index = a;
+            }
+            if (index === undefined) {
+                for (let cond of winConditions) {
+                    let [a, b, c] = cond;
+                    if (tttBoard[a] === 'X' && tttBoard[b] === 'X' && tttBoard[c] === '') index = c;
+                    else if (tttBoard[a] === 'X' && tttBoard[c] === 'X' && tttBoard[b] === '') index = b;
+                    else if (tttBoard[b] === 'X' && tttBoard[c] === 'X' && tttBoard[a] === '') index = a;
                 }
             }
-            
-            if (index === undefined) {
-                for (let condition of winConditions) {
-                    let [a, b, c] = condition;
-                    if (tttBoard[a] === 'X' && tttBoard[b] === 'X' && tttBoard[c] === '') {
-                        index = c;
-                    } else if (tttBoard[a] === 'X' && tttBoard[c] === 'X' && tttBoard[b] === '') {
-                        index = b;
-                    } else if (tttBoard[b] === 'X' && tttBoard[c] === 'X' && tttBoard[a] === '') {
-                        index = a;
-                    }
-                }
-            }
-            
-            if (index === undefined) {
-                index = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
-            }
-            
+            if (index === undefined) index = empty[Math.floor(Math.random() * empty.length)];
             tttBoard[index] = 'O';
-            const cells = document.querySelectorAll('#tictactoe .cell');
-            cells[index].textContent = 'O';
-            cells[index].disabled = true;
-            
+            document.querySelectorAll('#tictactoe .cell')[index].textContent = 'O';
+            document.querySelectorAll('#tictactoe .cell')[index].disabled = true;
             if (tttCheckWin('O')) {
                 document.getElementById('ttt-status').textContent = '😔 Bilgisayar Kazandı!';
                 tttGameActive = false;
@@ -1077,34 +1471,314 @@
                 document.getElementById('tttComputerWins').textContent = tttComputerWins;
                 return;
             }
-            
-            if (tttBoard.every(cell => cell !== '')) {
+            if (tttBoard.every(c => c !== '')) {
                 document.getElementById('ttt-status').textContent = '🤝 Berabere!';
                 tttGameActive = false;
                 return;
             }
-            
             tttCurrentPlayer = 'X';
             document.getElementById('ttt-status').textContent = 'Senin sıran (X)';
         }
-
         function tttCheckWin(player) {
-            return winConditions.some(condition => {
-                return condition.every(index => tttBoard[index] === player);
-            });
+            return winConditions.some(cond => cond.every(i => tttBoard[i] === player));
         }
-
         function resetTTTGame() {
             tttBoard = ['', '', '', '', '', '', '', '', ''];
             tttGameActive = true;
             tttCurrentPlayer = 'X';
             document.getElementById('ttt-status').textContent = 'Oyuncu başlasın (X)';
-            const cells = document.querySelectorAll('#tictactoe .cell');
-            cells.forEach(cell => {
+            document.querySelectorAll('#tictactoe .cell').forEach(cell => {
                 cell.textContent = '';
                 cell.disabled = false;
             });
         }
+        initTTTGame();
+
+        // ==================== SIMON SAYS ====================
+        let simonSequence = [], simonUserSequence = [], simonLevel = 1, simonGameActive = false;
+        const simonColors = ['simon-red', 'simon-green', 'simon-yellow', 'simon-blue'];
+        function startSimon() {
+            simonSequence = []; simonUserSequence = []; simonLevel = 1;
+            document.getElementById('simon-level').textContent = '1';
+            simonGameActive = true;
+            simonPlaySequence();
+        }
+        function simonPlaySequence() {
+            simonUserSequence = [];
+            simonSequence.push(Math.floor(Math.random() * 4));
+            simonSequence.forEach((color, i) => {
+                setTimeout(() => simonFlash(simonColors[color]), i * 500);
+            });
+        }
+        function simonFlash(color) {
+            const element = document.getElementById(color);
+            element.style.opacity = '0.5';
+            setTimeout(() => element.style.opacity = '1', 200);
+        }
+        function simonClick(index) {
+            if (!simonGameActive) return;
+            simonUserSequence.push(index);
+            simonFlash(simonColors[index]);
+            if (simonUserSequence[simonUserSequence.length - 1] !== simonSequence[simonUserSequence.length - 1]) {
+                alert('Game Over! Level: ' + simonLevel);
+                simonGameActive = false;
+                return;
+            }
+            if (simonUserSequence.length === simonSequence.length) {
+                simonLevel++;
+                document.getElementById('simon-level').textContent = simonLevel;
+                setTimeout(simonPlaySequence, 1000);
+            }
+        }
+        function resetSimon() {
+            simonGameActive = false;
+            simonSequence = [];
+            simonUserSequence = [];
+            simonLevel = 1;
+            document.getElementById('simon-level').textContent = '1';
+        }
+
+        // ==================== QUIZ ====================
+        const quizQuestions = [
+            { q: "Dünya'nın en büyük okyanusı hangisidir?", options: ["Pasifik", "Atlantik", "Hindistan"], correct: 0 },
+            { q: "Hangi gezegen Güneş'e en yakındır?", options: ["Venüs", "Merkür", "Dünya"], correct: 1 },
+            { q: "Türkiye'nin başkenti nedir?", options: ["İstanbul", "Ankara", "İzmir"], correct: 1 },
+            { q: "Dünyanın en yüksek dağı hangisidir?", options: ["Elbrus", "Everest", "Mckinley"], correct: 1 },
+            { q: "Kaç tane kontinenti vardır?", options: ["5", "6", "7"], correct: 2 },
+            { q: "Hangi element Fe sembolüyle gösterilir?", options: ["Flor", "Demir", "Gümüş"], correct: 1 },
+            { q: "Mona Lisa'nın sanatçısı kimdir?", options: ["Michelangelo", "Leonardo da Vinci", "Raphael"], correct: 1 },
+            { q: "Grafiklerde en sık kullanılan yazı tipi hangisidir?", options: ["Arial", "Times New Roman", "Courier"], correct: 0 },
+            { q: "Python ne için kullanılır?", options: ["Tasarım", "Programlama", "Müzik"], correct: 1 },
+            { q: "HTML'in tam şekli nedir?", options: ["Hyper Tool Markup Language", "Hyper Text Markup Language", "High Tech Machine Language"], correct: 1 }
+        ];
+        let quizCurrentQuestion = 0, quizScore = 0;
+        function startQuiz() {
+            quizCurrentQuestion = 0;
+            quizScore = 0;
+            showQuizQuestion();
+        }
+        function showQuizQuestion() {
+            if (quizCurrentQuestion >= quizQuestions.length) {
+                alert(`Quiz Bitti! Skor: ${quizScore}/10`);
+                document.getElementById('quiz-score').textContent = quizScore + ' / 10';
+                return;
+            }
+            const q = quizQuestions[quizCurrentQuestion];
+            document.getElementById('quiz-question').textContent = q.q;
+            const optionsDiv = document.getElementById('quiz-options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'btn';
+                btn.textContent = opt;
+                btn.onclick = () => quizAnswer(i);
+                optionsDiv.appendChild(btn);
+            });
+            document.getElementById('quiz-score').textContent = quizCurrentQuestion + ' / 10';
+        }
+        function quizAnswer(index) {
+            if (index === quizQuestions[quizCurrentQuestion].correct) quizScore++;
+            quizCurrentQuestion++;
+            showQuizQuestion();
+        }
+        startQuiz();
+
+        // ==================== HANGMAN ====================
+        const hangmanWords = ['JavaScript', 'Python', 'Bilgisayar', 'Türkiye', 'Manzara', 'Yükseklik', 'Oyuncu'];
+        let hangmanWord = '', hangmanGuessed = [], hangmanChances = 6;
+        function startHangman() {
+            hangmanWord = hangmanWords[Math.floor(Math.random() * hangmanWords.length)].toUpperCase();
+            hangmanGuessed = [];
+            hangmanChances = 6;
+            updateHangman();
+            generateHangmanButtons();
+        }
+        function generateHangmanButtons() {
+            const buttons = document.getElementById('hangman-buttons');
+            buttons.innerHTML = '';
+            'ABCÇDEFĞĞHIIJKLMNOÖPRSŞTUÜVYZ'.split('').forEach(letter => {
+                const btn = document.createElement('button');
+                btn.textContent = letter;
+                btn.className = 'btn btn-small';
+                btn.onclick = () => guessHangman(letter, btn);
+                buttons.appendChild(btn);
+            });
+        }
+        function guessHangman(letter, btn) {
+            btn.disabled = true;
+            if (hangmanWord.includes(letter)) {
+                hangmanGuessed.push(letter);
+            } else {
+                hangmanChances--;
+            }
+            updateHangman();
+            if (hangmanChances === 0) alert('Kaybettin!');
+            if (hangmanWord.split('').every(l => hangmanGuessed.includes(l))) alert('Kazandın!');
+        }
+        function updateHangman() {
+            let display = hangmanWord.split('').map(l => hangmanGuessed.includes(l) ? l : '_').join(' ');
+            document.getElementById('hangman-word').textContent = display;
+            document.getElementById('hangman-chances').textContent = hangmanChances;
+            document.getElementById('hangman-guessed').textContent = hangmanGuessed.join(', ') || 'Hiçbiri';
+        }
+        startHangman();
+
+        // ==================== MINES ====================
+        let minesScore = 0, minesBombs = [];
+        function startMines() {
+            minesScore = 0;
+            minesBombs = [];
+            for (let i = 0; i < 25; i++) {
+                minesBombs[i] = Math.random() < 0.2;
+            }
+            const board = document.getElementById('minesboard');
+            board.innerHTML = '';
+            minesBombs.forEach((isBomb, i) => {
+                const cell = document.createElement('div');
+                cell.style.width = '50px';
+                cell.style.height = '50px';
+                cell.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                cell.style.border = '2px solid white';
+                cell.style.borderRadius = '5px';
+                cell.style.cursor = 'pointer';
+                cell.style.fontSize = '24px';
+                cell.style.display = 'flex';
+                cell.style.alignItems = 'center';
+                cell.style.justifyContent = 'center';
+                cell.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+                cell.onclick = () => {
+                    if (isBomb) {
+                        cell.textContent = '💣';
+                        alert('Mayına bastın! Skor: ' + minesScore);
+                        startMines();
+                    } else {
+                        minesScore++;
+                        cell.style.background = '#4CAF50';
+                        cell.style.pointerEvents = 'none';
+                        document.getElementById('mine-score').textContent = minesScore;
+                        if (minesScore === 20) alert('Kazandın!');
+                    }
+                };
+                board.appendChild(cell);
+            });
+            document.getElementById('mine-score').textContent = '0';
+        }
+        startMines();
+
+        // ==================== WHACK A MOLE ====================
+        let whackScore = 0, whackActive = false;
+        function startWhackMole() {
+            whackScore = 0;
+            whackActive = true;
+            document.getElementById('whack-score').textContent = '0';
+            const board = document.getElementById('whackboard');
+            board.innerHTML = '';
+            for (let i = 0; i < 9; i++) {
+                const hole = document.createElement('div');
+                hole.style.width = '80px';
+                hole.style.height = '80px';
+                hole.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                hole.style.borderRadius = '10px';
+                hole.style.border = '3px solid white';
+                hole.style.display = 'flex';
+                hole.style.alignItems = 'center';
+                hole.style.justifyContent = 'center';
+                hole.style.fontSize = '40px';
+                hole.style.cursor = 'pointer';
+                hole.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+                hole.textContent = '🕳️';
+                board.appendChild(hole);
+            }
+            let time = 30;
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const holes = document.querySelectorAll('#whackboard > div');
+                    const randomHole = holes[Math.floor(Math.random() * holes.length)];
+                    randomHole.textContent = '🐭';
+                    randomHole.onclick = () => {
+                        if (whackActive) {
+                            whackScore++;
+                            document.getElementById('whack-score').textContent = whackScore;
+                            randomHole.textContent = '🕳️';
+                        }
+                    };
+                    setTimeout(() => randomHole.textContent = '🕳️', 1000);
+                }, i * 1500);
+            }
+            setTimeout(() => {
+                whackActive = false;
+                alert('Oyun Bitti! Skor: ' + whackScore);
+            }, 45000);
+        }
+
+        // ==================== MATCH PAIRS ====================
+        let matchEmojis = ['🍕', '🍕', '🍔', '🍔', '🍟', '🍟', '🌭', '🌭', '🍩', '🍩', '🍪', '🍪'];
+        let matchFlipped = [], matchMatched = [], matchMoves = 0, matchLock = false;
+        function initMatchPairs() {
+            const board = document.getElementById('matchpairsBoard');
+            board.innerHTML = '';
+            matchEmojis.sort(() => Math.random() - 0.5);
+            matchFlipped = []; matchMatched = []; matchMoves = 0; matchLock = false;
+            document.getElementById('matchpairs-moves').textContent = '0';
+            matchEmojis.forEach((emoji, i) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.textContent = '❓';
+                card.dataset.value = emoji;
+                card.onclick = () => flipMatchCard(card);
+                board.appendChild(card);
+            });
+        }
+        function flipMatchCard(card) {
+            if (matchLock || matchFlipped.includes(card) || matchMatched.includes(card.dataset.value)) return;
+            card.classList.add('flipped');
+            card.textContent = card.dataset.value;
+            matchFlipped.push(card);
+            if (matchFlipped.length === 2) checkMatchPairs();
+        }
+        function checkMatchPairs() {
+            matchLock = true;
+            matchMoves++;
+            document.getElementById('matchpairs-moves').textContent = matchMoves;
+            const [c1, c2] = matchFlipped;
+            if (c1.dataset.value === c2.dataset.value) {
+                c1.classList.add('matched');
+                c2.classList.add('matched');
+                matchMatched.push(c1.dataset.value);
+                matchFlipped = [];
+                matchLock = false;
+                if (matchMatched.length === matchEmojis.length / 2) alert(`🎉 Kazandın! ${matchMoves} hamlede!`);
+            } else {
+                setTimeout(() => {
+                    c1.classList.remove('flipped');
+                    c2.classList.remove('flipped');
+                    c1.textContent = '❓';
+                    c2.textContent = '❓';
+                    matchFlipped = [];
+                    matchLock = false;
+                }, 800);
+            }
+        }
+        function resetMatchPairs() { initMatchPairs(); }
+
+        // Sayfa yükleme
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.getElementById('matchpairs').classList.contains('active')) initMatchPairs();
+        });
+
+        // ==================== PLACEHOLDERs ====================
+        // Diğer oyunlar için placeholder fonksiyonlar
+        function initBreakout() { console.log('Breakout yüklendi'); }
+        function initPong() { console.log('Pong yüklendi'); }
+        function init2048() { console.log('2048 yüklendi'); }
+        function initJumpy() { console.log('Jumpy yüklendi'); }
+        function initSpaceShooter() { console.log('Space Shooter yüklendi'); }
+        function initTetris() { console.log('Tetris yüklendi'); }
+        function initRunner() { console.log('Runner yüklendi'); }
+        function initCatch() { console.log('Catch yüklendi'); }
+        function reset2048() {}
+        function startQuiz() {}
+
     </script>
 </body>
 </html>
