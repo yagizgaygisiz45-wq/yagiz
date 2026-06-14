@@ -3,41 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yağız Stüdyo | Projeler</title>
+    <title>Yağız Stüdyo | Premium</title>
     <style>
-        :root { --primary: #7000ff; --secondary: #00d4ff; --dark: #050505; }
-        body { background: var(--dark); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; scroll-behavior: smooth; }
+        :root { --neon-purple: #9d4edd; --neon-blue: #00f2ff; --glass: rgba(255, 255, 255, 0.05); }
         
-        .hero { text-align: center; padding: 50px 0; }
-        h1 { color: var(--secondary); font-size: 2.5rem; text-shadow: 0 0 15px var(--primary); }
+        body { 
+            background: #030303; color: white; font-family: 'Segoe UI', sans-serif; 
+            margin: 0; padding: 20px;
+        }
 
-        .btn-main { background: var(--primary); color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; display: inline-block; transition: 0.3s; }
+        .hero { text-align: center; padding: 40px 0; }
         
-        /* Oyunlar Bölümü */
-        .project-section { margin-top: 60px; padding: 20px; border-top: 1px solid #333; }
-        .game-card { background: #111; padding: 20px; border-radius: 15px; border: 1px solid #444; margin-top: 20px; }
-        .status-badge { color: #ffcc00; font-weight: bold; border: 1px solid #ffcc00; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
+        /* Premium Kart Tasarımı */
+        .project-card { 
+            background: var(--glass); backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255,255,255,0.1); padding: 25px; 
+            border-radius: 20px; margin-bottom: 20px;
+            transition: 0.4s; position: relative; overflow: hidden;
+        }
+        .project-card:hover { border-color: var(--neon-blue); transform: translateY(-5px); }
+        
+        /* Neon Çizgi Efekti */
+        .project-card::before { 
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; 
+            background: var(--neon-purple); border-radius: 5px; 
+        }
+
+        .status { 
+            background: rgba(0, 242, 255, 0.2); color: var(--neon-blue); 
+            padding: 5px 12px; border-radius: 50px; font-size: 0.75rem; 
+            font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        h2 { border-left: 4px solid var(--neon-purple); padding-left: 15px; margin-top: 40px; }
     </style>
 </head>
 <body>
 
 <div class="hero">
     <h1>YAĞIZ STÜDYO</h1>
-    <p>Dijital Ekosistem & Yapay Zeka</p>
-    <a href="#projelerim-alani" class="btn-main">PROJELERİM</a>
+    <a href="#projeler" style="color:var(--neon-blue); text-decoration:none;">KEŞFET ↓</a>
 </div>
 
-<div id="projelerim-alani" class="project-section">
-    <h2 style="color: var(--secondary);">🎮 Oyunlarımız</h2>
+<div id="projeler">
+    <h2>🎮 Oyunlarımız</h2>
     
-    <div class="game-card">
-        <h3>Yeni Projeler <span class="status-badge">YAKINDA GELECEK</span></h3>
-        <p>Stüdyomuzun yeni nesil oyun projeleri üzerinde yoğun bir şekilde çalışıyoruz. Yakın zamanda burada oynanabilir sürümleri göreceksin.</p>
+    <div class="project-card">
+        <span class="status">Geliştirme Aşamasında</span>
+        <h3 style="margin-top:15px;">Next-Gen Survival</h3>
+        <p style="color: #aaa;">Voxel tabanlı, yüksek optimizasyonlu hayatta kalma deneyimi. Oyun motoru entegrasyonları tamamlandı.</p>
     </div>
 
-    <div class="game-card">
-        <h3>Altyapı & Optimizasyon</h3>
-        <p>Oyun içi performans ve yapay zeka entegrasyonlu modüllerimiz geliştirme aşamasındadır.</p>
+    <div class="project-card">
+        <span class="status">Beta Süreci</span>
+        <h3 style="margin-top:15px;">MTA / FiveM Modülleri</h3>
+        <p style="color: #aaa;">Özel sunucular için yapay zeka destekli anti-cheat ve performans optimizasyon sistemleri.</p>
     </div>
 </div>
 
