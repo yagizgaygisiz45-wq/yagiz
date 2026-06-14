@@ -5,45 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yağız Stüdyo</title>
     <style>
-        :root { --neon-purple: #9d4edd; --neon-blue: #00f2ff; --glass: rgba(255, 255, 255, 0.05); }
-        body { background: #030303; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; }
-        .hero { text-align: center; padding: 40px 0; }
+        :root { --neon-purple: #9d4edd; --neon-blue: #00f2ff; }
+        
+        body { 
+            /* Arka plan: Koyu bir renk üzerine teknolojik bir görsel veya gradient */
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-attachment: fixed;
+            color: white; 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; padding: 20px;
+        }
+
+        .hero { text-align: center; padding: 60px 0; }
         
         .project-card { 
-            background: var(--glass); backdrop-filter: blur(10px); 
-            border: 1px solid rgba(255,255,255,0.1); padding: 25px; 
-            border-radius: 20px; margin-bottom: 20px; position: relative;
+            background: rgba(20, 20, 20, 0.7); /* Cam efekti için hafif şeffaf */
+            backdrop-filter: blur(15px); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            padding: 25px; 
+            border-radius: 20px; 
+            margin-bottom: 20px; 
+            position: relative;
         }
+
         .project-card::before { 
             content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; 
             background: var(--neon-purple); border-radius: 5px; 
         }
+
         .status { 
             background: rgba(255, 204, 0, 0.2); color: #ffcc00; 
-            padding: 5px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: bold;
+            padding: 5px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: bold;
         }
-        h2 { border-left: 4px solid var(--neon-purple); padding-left: 15px; margin-top: 40px; }
     </style>
 </head>
 <body>
 
 <div class="hero">
     <h1>YAĞIZ STÜDYO</h1>
+    <p style="color: var(--neon-blue);">Dijital Oyun & Yapay Zeka Geliştirme</p>
 </div>
 
 <div id="projeler">
-    <h2>🎮 Oyunlarımız</h2>
+    <h2 style="border-left: 4px solid var(--neon-purple); padding-left: 15px;">🎮 Oyunlarımız</h2>
     
     <div class="project-card">
         <span class="status">YAKINDA GELECEK</span>
         <h3 style="margin-top:15px;">Proje 1</h3>
-        <p style="color: #aaa;">Bu oyun üzerinde çalışmalarımız devam ediyor. Detaylar çok yakında paylaşılacak.</p>
+        <p style="color: #ccc;">Oyun motoru optimizasyonları ve yapay zeka entegrasyonu tamamlanmak üzere.</p>
     </div>
 
     <div class="project-card">
         <span class="status">YAKINDA GELECEK</span>
         <h3 style="margin-top:15px;">Proje 2</h3>
-        <p style="color: #aaa;">Yeni bir deneyim için hazırlık yapıyoruz. Beklemede kal!</p>
+        <p style="color: #ccc;">Yeni bir deneyim için hazırlık yapıyoruz. Beklemede kal!</p>
     </div>
 </div>
 
