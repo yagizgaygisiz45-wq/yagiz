@@ -3,38 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yağız Stüdyo | Premium</title>
+    <title>Yağız Stüdyo</title>
     <style>
         :root { --neon-purple: #9d4edd; --neon-blue: #00f2ff; --glass: rgba(255, 255, 255, 0.05); }
-        
-        body { 
-            background: #030303; color: white; font-family: 'Segoe UI', sans-serif; 
-            margin: 0; padding: 20px;
-        }
-
+        body { background: #030303; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; }
         .hero { text-align: center; padding: 40px 0; }
         
-        /* Premium Kart Tasarımı */
         .project-card { 
             background: var(--glass); backdrop-filter: blur(10px); 
             border: 1px solid rgba(255,255,255,0.1); padding: 25px; 
-            border-radius: 20px; margin-bottom: 20px;
-            transition: 0.4s; position: relative; overflow: hidden;
+            border-radius: 20px; margin-bottom: 20px; position: relative;
         }
-        .project-card:hover { border-color: var(--neon-blue); transform: translateY(-5px); }
-        
-        /* Neon Çizgi Efekti */
         .project-card::before { 
             content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; 
             background: var(--neon-purple); border-radius: 5px; 
         }
-
         .status { 
-            background: rgba(0, 242, 255, 0.2); color: var(--neon-blue); 
-            padding: 5px 12px; border-radius: 50px; font-size: 0.75rem; 
-            font-weight: bold; text-transform: uppercase; letter-spacing: 1px;
+            background: rgba(255, 204, 0, 0.2); color: #ffcc00; 
+            padding: 5px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: bold;
         }
-
         h2 { border-left: 4px solid var(--neon-purple); padding-left: 15px; margin-top: 40px; }
     </style>
 </head>
@@ -42,22 +29,21 @@
 
 <div class="hero">
     <h1>YAĞIZ STÜDYO</h1>
-    <a href="#projeler" style="color:var(--neon-blue); text-decoration:none;">KEŞFET ↓</a>
 </div>
 
 <div id="projeler">
     <h2>🎮 Oyunlarımız</h2>
     
     <div class="project-card">
-        <span class="status">Geliştirme Aşamasında</span>
-        <h3 style="margin-top:15px;">Next-Gen Survival</h3>
-        <p style="color: #aaa;">Voxel tabanlı, yüksek optimizasyonlu hayatta kalma deneyimi. Oyun motoru entegrasyonları tamamlandı.</p>
+        <span class="status">YAKINDA GELECEK</span>
+        <h3 style="margin-top:15px;">Proje 1</h3>
+        <p style="color: #aaa;">Bu oyun üzerinde çalışmalarımız devam ediyor. Detaylar çok yakında paylaşılacak.</p>
     </div>
 
     <div class="project-card">
-        <span class="status">Beta Süreci</span>
-        <h3 style="margin-top:15px;">MTA / FiveM Modülleri</h3>
-        <p style="color: #aaa;">Özel sunucular için yapay zeka destekli anti-cheat ve performans optimizasyon sistemleri.</p>
+        <span class="status">YAKINDA GELECEK</span>
+        <h3 style="margin-top:15px;">Proje 2</h3>
+        <p style="color: #aaa;">Yeni bir deneyim için hazırlık yapıyoruz. Beklemede kal!</p>
     </div>
 </div>
 
