@@ -3,52 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yağız Stüdyo | Ekosistem</title>
+    <title>Yağız Stüdyo</title>
     <style>
-        body { background: #050505; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 10px; }
-        .hero { text-align: center; padding: 40px 0; }
-        .hero h1 { color: #00ff41; font-size: 2.5rem; text-shadow: 0 0 10px #00ff41; margin: 0; }
+        body { background: #050505; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; }
+        .hero { text-align: center; padding: 30px 0; border-bottom: 2px solid #00ff41; margin-bottom: 30px; }
+        h1 { color: #00ff41; font-size: 2rem; margin: 0; text-shadow: 0 0 10px #00ff41; }
         
-        .section-title { color: #00ff41; margin-top: 40px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        
-        /* Düzenli Grid Yapısı */
-        .grid { display: grid; grid-template-columns: 1fr; gap: 15px; max-width: 600px; margin: auto; }
-        .card { background: #111; border: 1px solid #333; padding: 15px; border-radius: 10px; border-left: 4px solid #00ff41; }
-        
-        /* Detaylar İçin Basit Gizleme */
-        .details { display: none; margin-top: 10px; font-size: 0.9rem; color: #ccc; border-top: 1px solid #222; padding-top: 10px; }
-        .btn { background: #00ff41; color: #000; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; }
+        /* MOBİL İÇİN DÜZENLİ KUTULAR */
+        .container { display: flex; flex-direction: column; gap: 15px; max-width: 500px; margin: auto; }
+        .card { background: #111; border: 1px solid #333; padding: 20px; border-radius: 12px; border-left: 5px solid #00ff41; }
+        .card h3 { margin: 0 0 10px 0; color: #00ff41; }
+        .card p { font-size: 0.95rem; color: #ddd; line-height: 1.5; margin: 0; }
     </style>
 </head>
 <body>
 
 <div class="hero">
     <h1>YAĞIZ STÜDYO</h1>
-    <p>Gelişmiş Yazılım & Oyun Ekosistemi</p>
+    <p>Dijital Ekosistem Merkezi</p>
 </div>
 
-<h2 class="section-title">Projelerim & Teknolojiler</h2>
-<div class="grid">
+<div class="container">
     <div class="card">
         <h3>Yapay Zeka & Oyun</h3>
-        <button class="btn" onclick="this.nextElementSibling.style.display='block'">DETAYLAR</button>
-        <div class="details">Web tabanlı, websocket senkronizasyonu ile çalışan, düşük gecikmeli çok oyunculu (io) altyapılar.</div>
+        <p>Web tabanlı, websocket senkronizasyonu ile çalışan, yüksek performanslı oyun altyapıları.</p>
     </div>
     <div class="card">
         <h3>Kernel & Bypass</h3>
-        <button class="btn" onclick="this.nextElementSibling.style.display='block'">DETAYLAR</button>
-        <div class="details">Lua ve C++ ile yazılmış, gelişmiş hafıza tarama ve sistem optimizasyon çözümleri.</div>
+        <p>Sistemleri optimize eden, güvenlik duvarlarını aşan ve gelişmiş hafıza tarama çözümleri.</p>
     </div>
     <div class="card">
-        <h3>Otomasyon Botları</h3>
-        <button class="btn" onclick="this.nextElementSibling.style.display='block'">DETAYLAR</button>
-        <div class="details">Bulut sistemlerinde 7/24 çalışan, veri analizi ve derin öğrenme odaklı siber mimariler.</div>
+        <h3>Otomasyon & Scraping</h3>
+        <p>Bulut sistemlerinde 7/24 çalışan, veri analizi ve derin öğrenme odaklı akıllı botlar.</p>
     </div>
 </div>
-
-<script>
-    // Detayları gösterme scripti
-</script>
 
 </body>
 </html>
