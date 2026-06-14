@@ -3,40 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yağız Stüdyo</title>
+    <title>Yağız Stüdyo | Profesyonel Ekosistem</title>
     <style>
-        body { background: #050505; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; }
-        .hero { text-align: center; padding: 30px 0; border-bottom: 2px solid #00ff41; margin-bottom: 30px; }
-        h1 { color: #00ff41; font-size: 2rem; margin: 0; text-shadow: 0 0 10px #00ff41; }
+        /* Modern Renk Paleti: Yeşil yerine Mor/Neon Mavi */
+        :root { --primary: #7000ff; --secondary: #00d4ff; --dark: #0a0a0a; }
         
-        /* MOBİL İÇİN DÜZENLİ KUTULAR */
-        .container { display: flex; flex-direction: column; gap: 15px; max-width: 500px; margin: auto; }
-        .card { background: #111; border: 1px solid #333; padding: 20px; border-radius: 12px; border-left: 5px solid #00ff41; }
-        .card h3 { margin: 0 0 10px 0; color: #00ff41; }
-        .card p { font-size: 0.95rem; color: #ddd; line-height: 1.5; margin: 0; }
+        body { 
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
+                        url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
+            background-size: cover;
+            color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; 
+        }
+
+        .hero { text-align: center; padding: 50px 0; }
+        h1 { color: var(--secondary); font-size: 2.2rem; text-shadow: 0 0 15px var(--primary); }
+
+        .btn-projelerim { 
+            background: var(--primary); color: white; padding: 15px 30px; 
+            border-radius: 50px; text-decoration: none; display: block; 
+            width: 200px; margin: 20px auto; text-align: center; font-weight: bold;
+        }
+
+        .card { background: rgba(20, 20, 20, 0.9); border: 1px solid #333; padding: 20px; border-radius: 15px; margin-bottom: 15px; }
+        .card h3 { color: var(--secondary); margin-top: 0; }
+        
+        /* AÇILIP KAPANAN EFEKT */
+        .content { display: none; margin-top: 10px; color: #aaa; font-size: 0.9rem; transition: 0.3s; }
+        .toggle-btn { background: transparent; border: 1px solid var(--secondary); color: var(--secondary); padding: 5px 15px; border-radius: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <div class="hero">
     <h1>YAĞIZ STÜDYO</h1>
-    <p>Dijital Ekosistem Merkezi</p>
+    <p>Dijital Ekosistem & Yapay Zeka</p>
+    <a href="#projeler" class="btn-projelerim">PROJELERİM</a>
 </div>
 
-<div class="container">
+<div id="projeler" class="container">
     <div class="card">
         <h3>Yapay Zeka & Oyun</h3>
-        <p>Web tabanlı, websocket senkronizasyonu ile çalışan, yüksek performanslı oyun altyapıları.</p>
+        <button class="toggle-btn" onclick="toggle(this)">GÖSTER/GİZLE</button>
+        <div class="content">Web tabanlı, yüksek performanslı oyun altyapıları ve AI entegrasyonları.</div>
     </div>
+    
     <div class="card">
         <h3>Kernel & Bypass</h3>
-        <p>Sistemleri optimize eden, güvenlik duvarlarını aşan ve gelişmiş hafıza tarama çözümleri.</p>
-    </div>
-    <div class="card">
-        <h3>Otomasyon & Scraping</h3>
-        <p>Bulut sistemlerinde 7/24 çalışan, veri analizi ve derin öğrenme odaklı akıllı botlar.</p>
+        <button class="toggle-btn" onclick="toggle(this)">GÖSTER/GİZLE</button>
+        <div class="content">Lua ve C++ tabanlı, gelişmiş güvenlik ve optimizasyon sistemleri.</div>
     </div>
 </div>
+
+<script>
+    function toggle(btn) {
+        let content = btn.nextElementSibling;
+        content.style.display = (content.style.display === "block") ? "none" : "block";
+    }
+</script>
 
 </body>
 </html>
