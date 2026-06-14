@@ -2,61 +2,49 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yağız Stüdyo | Portfolio</title>
+    <title>Yağız Stüdyo | Ekosistem</title>
     <style>
-        :root { --neon: #00ff41; --dark: #050505; }
-        body { background-color: var(--dark); color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; overflow-x: hidden; }
+        body { background: #050505; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; }
+        .hero { text-align: center; padding: 80px 20px; }
+        .hero h1 { color: #00ff41; font-size: 3rem; text-shadow: 0 0 20px #00ff41; }
         
-        /* Neon Animasyonları */
-        @keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
-        .neon-text { animation: flicker 2s infinite; text-shadow: 0 0 10px var(--neon); }
-
-        .container { max-width: 900px; margin: auto; padding: 20px; }
+        .section-title { text-align: center; font-size: 2rem; margin-top: 50px; color: #fff; }
         
-        header { text-align: center; padding: 60px 20px; border-bottom: 1px solid #222; }
-        h1 { font-size: 3rem; color: var(--neon); margin: 0; }
-
-        /* Düzenli Izgara */
-        .coming-soon { 
-            padding: 50px; 
-            border: 2px dashed #333; 
-            text-align: center; 
-            border-radius: 15px;
-            background: linear-gradient(145deg, #0a0a0a, #050505);
-        }
-
-        .stats { display: flex; justify-content: space-around; padding: 40px; border-top: 1px solid #222; }
-        .stat-item { text-align: center; }
-        .stat-item h3 { color: var(--neon); margin: 0; }
-
-        footer { text-align: center; padding: 20px; font-size: 0.8rem; color: #444; }
+        /* Kart Yapısı */
+        .card-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; padding: 20px; max-width: 1100px; margin: auto; }
+        .card { background: #111; border: 1px solid #222; border-radius: 12px; padding: 20px; transition: 0.4s; border-left: 4px solid #00ff41; }
+        .card:hover { transform: translateY(-10px); border-color: #00ff41; box-shadow: 0 10px 30px rgba(0, 255, 65, 0.15); }
+        .card h3 { color: #00ff41; margin-top: 0; }
+        
+        .btn { display: inline-block; background: transparent; border: 1px solid #00ff41; color: #00ff41; padding: 8px 16px; text-decoration: none; border-radius: 5px; margin-top: 15px; }
+        .btn:hover { background: #00ff41; color: #000; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1 class="neon-text">YAĞIZ STÜDYO</h1>
-    <p>Dijital oyun geliştirme ve inovasyon alanı.</p>
-</header>
+<section class="hero">
+    <h1>YAĞIZ STÜDYO</h1>
+    <p>Dijital oyun geliştirme, optimizasyon ve yapay zeka çözümleri.</p>
+</section>
 
-<div class="container">
-    <div class="coming-soon">
-        <h2>🛠️ Geliştirme Aşamasında</h2>
-        <p>Yeni projeler ve büyük güncellemeler üzerinde çalışıyorum.</p>
-        <p>Gelecek oyunlar için beklemede kal!</p>
+<h2 class="section-title">Geliştirme Ekosistemimiz</h2>
+<div class="card-container">
+    <div class="card">
+        <h3>Yapay Zeka Destekli Oyunlar</h3>
+        <p>Web tabanlı, yüksek performanslı ve websocket senkronizasyonu ile çalışan oyun altyapıları.</p>
+        <a href="#" class="btn">DETAYLAR</a>
     </div>
-
-    <div class="stats">
-        <div class="stat-item"><h3>0</h3><p>Aktif Proje</p></div>
-        <div class="stat-item"><h3>100%</h3><p>Kod Kalitesi</p></div>
-        <div class="stat-item"><h3>Beta</h3><p>Durum</p>
+    <div class="card">
+        <h3>Kernel & Bypass Çözümleri</h3>
+        <p>Sınırları zorlayan, güvenlik duvarlarını aşan ve test ortamlarını optimize eden gelişmiş sistemler.</p>
+        <a href="#" class="btn">DETAYLAR</a>
+    </div>
+    <div class="card">
+        <h3>Otomasyon & Scraping</h3>
+        <p>Bulut sistemleri üzerinde 7/24 çalışan veri analiz odaklı akıllı bot mimarileri.</p>
+        <a href="#" class="btn">DETAYLAR</a>
     </div>
 </div>
-
-<footer>
-    <p>Yağız © 2026 | Modern Web Tasarımı</p>
-</footer>
 
 </body>
 </html>
